@@ -12,16 +12,15 @@ module "GlobalGHNet" {
   secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
   resourceGroup  = azurerm_resource_group.vonGlobalHealhRG.name
   networkName    = "GlobalHealthNet"
-  parentResource = azurerm_resource_group.vonGlobalHealhRG
 }
 
 
 #create a sql Database :)
 module "envSqlDatabase" {
   source       = "./modules/SqlServers"
-  resoureGroup = module.GlobalGHNet.rg_name_output
-  location     = "eastus"
-  sqlName      = "von${local.baseName}db${local.baseInstance}"
+  resoureGroup = azurerm_resource_group.vonGlobalHealhRG.name
+  location     = azurerm_resource_group.vonGlobalHealhRG.location
+  sqlName      = "globalhealthsql"
   sqlLogin     = "tdarttAdmin"
   sqlPassword  = "Squ!dD@ncer"
   databases    = tolist(var.dbNames)
