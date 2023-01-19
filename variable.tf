@@ -6,7 +6,7 @@ variable "environment" {
 
 variable "dbNames" {
   type    = list(any)
-  default = ["TestStgDB1", "TestStgDB2", "TestStgDB3"]
+  default = ["VonApp", "GH_PHI"]
 }
 
 variable "instance" {
@@ -14,9 +14,10 @@ variable "instance" {
   default     = 0
   description = "The current instance of the item"
 }
-variable "default_tags" {
-  type = map(string)
-  default = {
-    "Owner" = "VON"
-  }
-}
+# variable "default_tags" {
+#   type = map(string)
+#   default = {
+#     "Owner"       = "VON"
+#     "environment" = "${var.environment}"
+#   }
+# }

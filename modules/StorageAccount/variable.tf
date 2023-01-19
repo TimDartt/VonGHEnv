@@ -10,3 +10,7 @@ variable "location" {
   type        = string
   description = "Storage account location"
 }
+variable "sqlName" {
+  type        = string
+  description = "Name of the sqlServer to associate the pool with"
+}

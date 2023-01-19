@@ -20,14 +20,13 @@ module "envSqlDatabase" {
   source       = "./modules/SqlServers"
   resoureGroup = azurerm_resource_group.vonGlobalHealhRG.name
   location     = azurerm_resource_group.vonGlobalHealhRG.location
-  sqlName      = "globalhealthsql"
+  sqlName      = "globalhealth-sql${var.instance}" # note: We currently have this name in the existing Bonfire env. Names must be unique in azure (all of azure)
   sqlLogin     = "tdarttAdmin"
   sqlPassword  = "Squ!dD@ncer"
   databases    = tolist(var.dbNames)
   tags = {
-    "Owner"       = "VON"
-    "Creator"     = "Tim"
-    "Environment" = var.environment
-    "instance"    = "${var.instance}"
+    "Owner"    = "VON"
+    "Creator"  = "Tim"
+    "instance" = "${var.instance}"
   }
 }

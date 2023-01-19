@@ -5,13 +5,6 @@ output "test2" {
   value = "SqlName: ${var.sqlName}"
 }
 
-module "sqlStorage" {
-  source              = "../StorageAccount"
-  location            = var.location
-  resource_group_name = var.resoureGroup
-  base_name           = "${replace(var.sqlName, "-", "")}str"
-}
-
 resource "azurerm_mssql_server" "sqlInstance" {
   name                         = var.sqlName
   resource_group_name          = var.resoureGroup
@@ -22,6 +15,13 @@ resource "azurerm_mssql_server" "sqlInstance" {
   tags                         = var.tags
 }
 
+module "sqlStorage" {
+  source              = "../StorageAccount"
+  location            = var.location
+  resource_group_name = var.resoureGroup
+  sqlName             = azurerm_mssql_server.sqlInstance.name
+  base_name           = "${replace(var.sqlName, "-", "")}str"
+}
 
 #loop though the databases and create whats passed
 module "createDBs" {
