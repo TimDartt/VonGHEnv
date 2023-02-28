@@ -6,20 +6,6 @@ resource "azurerm_network_security_group" "envSecGroup" {
 
   dynamic "security_rule" {
     for_each = var.security_rules
-    # for now: don't worry about building out the various subnets
-    # content {
-    #   name                       = security_rule.value["name"]
-    #   priority                   = var.subNet * 1000 + security_rule.value["priority"]
-    #   direction                  = security_rule.value["direction"]
-    #   access                     = security_rule.value["access"]
-    #   protocol                   = security_rule.value["protocol"]
-    #   source_port_range          = security_rule.value["source_port_range"]
-    #   destination_port_range     = security_rule.value["destination_port_range"]
-    #   source_address_prefix      = security_rule.value["source_address_prefix"]
-    #   destination_address_prefix = security_rule.value["destination_address_prefix"]
-    # }
-    #replace(security_rule.value["source_address_prefix"], "x", var.subNet)
-    #replace(security_rule.value["destination_address_prefix"], "x", var.subNet)
     content {
       name                       = security_rule.value.name
       priority                   = security_rule.value.priority
@@ -39,15 +25,22 @@ resource "azurerm_virtual_network" "test" {
   name                = var.networkName
   location            = var.location
   resource_group_name = var.resourceGroup
-  address_space       = ["10.0.0.0/16"]
-  dns_servers         = ["10.0.0.4", "10.0.0.5"]
+  address_space       = ["10.150.0.0/16"]
   subnet {
-    name           = "subnet1"
-    address_prefix = "10.0.1.0/24"
+    name           = "gh-public-1"
+    address_prefix = "10.150.60.0/24"
   }
   subnet {
-    name           = "subnet2"
-    address_prefix = "10.0.2.0/24"
+    name           = "gh-private-1"
+    address_prefix = "10.150.70.0/24"
+  }
+  subnet {
+    name           = "gh-internal-1"
+    address_prefix = "10.150.80.0/24"
+  }
+  subnet {
+    name           = "core-routing"
+    address_prefix = "10.150.50.0/24"
     security_group = azurerm_network_security_group.envSecGroup.id
   }
   tags = {
