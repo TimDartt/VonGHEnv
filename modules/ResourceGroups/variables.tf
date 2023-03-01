@@ -7,3 +7,9 @@ variable "ResourceLocation" {
   type        = string
 
 }
+
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "All the tags to pass to a module"
+}
