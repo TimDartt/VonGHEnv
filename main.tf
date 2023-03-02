@@ -7,6 +7,7 @@ module "resourceGroup" {
   for_each          = { for index, item in var.ResourceGroups : index => item }
   ResourceGroupName = each.value.resource_group_name
   ResourceLocation  = each.value.location
+  tags              = each.value.tags
 }
 
 

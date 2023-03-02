@@ -7,5 +7,5 @@
 resource "azurerm_resource_group" "baseRg" {
   name     = var.ResourceGroupName
   location = var.ResourceLocation
-  #tags     = var.tags
+  tags     = var.tags
 }
