@@ -10,15 +10,15 @@ module "resourceGroup" {
 }
 
 
-#define the network resource... 
-module "Network_Building" {
-  source         = "./modules/Network"
-  subNet         = "1"                                      # not currently in use
-  security_rules = concat(var.SQLSecRules, var.IISSecRules) #these are loose at best. We still need to setup ASG's
-  secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
-  resourceGroup  = azurerm_resource_group.vonGlobalHealhRG.name
-  networkName    = "GlobalHealthNet"
-}
+# #define the network resource... 
+# module "Network_Building" {
+#   source         = "./modules/Network"
+#   subNet         = "1"                                      # not currently in use
+#   security_rules = concat(var.SQLSecRules, var.IISSecRules) #these are loose at best. We still need to setup ASG's
+#   secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
+#   resourceGroup  = azurerm_resource_group.vonGlobalHealhRG.name
+#   networkName    = "GlobalHealthNet"
+# }
 
 
 
