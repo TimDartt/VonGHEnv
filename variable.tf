@@ -29,6 +29,7 @@ variable "ResourceGroups" {
   type = list(object({
     resource_group_name = string
     location            = string
+    #tags                = list(string)
   }))
   default = [
     { resource_group_name = "DefaultResourceGroup-EUS",
