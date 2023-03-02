@@ -30,34 +30,86 @@ variable "ResourceGroups" {
   type = list(object({
     resource_group_name = string
     location            = string
-    #tags                = list(string)
+    tags                = map(string)
   }))
   default = [
     { resource_group_name = "DefaultResourceGroup-EUS",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "GHFunctions",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "MA_amw-ghmobile_eastus_managed",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "NetworkWatcherRG",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "gh-monitor",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "gh-networking",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "gh-scaff-private-ressolver",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "gh-scaffold-dns",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "gh-scaffold-fhir",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "gh-scaffold-loadbalancer",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "gh-scaffold-storage",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "gh-scaffold-workstations",
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
     location = "eastus" },
     { resource_group_name = "gh-scaffolding-database"
+      tags = {
+        source       = "terraform"
+        created-date = timestamp()
+      },
   location = "eastus" }]
 }
 
