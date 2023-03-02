@@ -21,6 +21,7 @@ variable "instance" {
 #     "Owner"       = "VON"
 #     "environment" = "${var.environment}"
 #   }
+
 # }
 
 #Define all the resource groups that we are using and create them
