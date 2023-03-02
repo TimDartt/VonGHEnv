@@ -19,6 +19,8 @@
 
 
 # Define and build the Resource Groups
+# by prebuilding the resources and groups we can reference them later in the process without having to build them as an initial step
+
 module "resourceGroup" {
   source            = "./modules/ResourceGroups"
   for_each          = { for index, item in var.ResourceGroups : index => item }
