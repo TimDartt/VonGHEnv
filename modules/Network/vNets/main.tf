@@ -25,7 +25,7 @@ resource "azurerm_virtual_network" "test" {
   name                = var.networkName
   location            = var.location
   resource_group_name = var.resourceGroup
-  address_space       = ["10.150.0.0/24"]
+  address_space       = ["10.150.0.0/24."]
   subnet {
     name           = "core-routing"
     address_prefix = "10.150.50.0/24"
@@ -44,7 +44,7 @@ resource "azurerm_virtual_network" "test" {
   }
   subnet {
     name           = "GatewaySubnet"
-    address_prefix = "10.150.0.0/24 "
+    address_prefix = "10.150.0.0/24"
   }
   subnet {
     name           = "GH-Scaffold-VM"
