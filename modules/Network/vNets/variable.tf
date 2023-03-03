@@ -40,3 +40,8 @@ variable "security_rules" {
   }))
 }
 
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "All the tags to pass to a module test"
+}
