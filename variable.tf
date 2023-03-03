@@ -1,7 +1,7 @@
 variable "environment" {
   type        = string
-  default     = "Stg"
-  description = "Staging target deployment area"
+  default     = "Dev"
+  description = "Dev target deployment area"
 }
 
 variable "dbNames" {
