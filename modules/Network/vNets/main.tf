@@ -25,14 +25,14 @@ resource "azurerm_virtual_network" "test" {
   name                = var.networkName
   location            = var.location
   resource_group_name = var.resourceGroup
-  address_space       = ["10.140.0.0/16"]
+  address_space       = ["${var.BaseNet}0.0/16"]
   subnet {
     name           = "core-routing"
-    address_prefix = "${var.BaseNet}0/24"
+    address_prefix = "${var.BaseNet}50.0/24"
   }
   subnet {
     name           = "AzureFirewallSubnet"
-    address_prefix = "${var.BaseNet}0/24"
+    address_prefix = "${var.BaseNet}100.0/24"
   }
   subnet {
     name           = "AzureFirewallManagementSubnet"
