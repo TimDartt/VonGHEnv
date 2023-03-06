@@ -46,3 +46,7 @@ variable "tags" {
   description = "All the tags to pass to a module test"
 }
 
+variable "BaseNet" {
+  type        = string
+  description = "The base network address for the environment"
+}
