@@ -30,10 +30,10 @@ resource "azurerm_virtual_network" "test" {
   #   name           = "core-routing"
   #   address_prefix = "10.150.50.0/24"
   # }
-  # subnet {
-  #   name           = "AzureFirewallSubnet"
-  #   address_prefix = "10.150.100.0/24"
-  # }
+  subnet {
+    name           = "AzureFirewallSubnet"
+    address_prefix = "10.150.100.0/24"
+  }
   # subnet {
   #   name           = "AzureFirewallManagementSubnet"
   #   address_prefix = "10.150.90.0/24"
