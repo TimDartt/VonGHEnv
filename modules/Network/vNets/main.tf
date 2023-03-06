@@ -26,10 +26,10 @@ resource "azurerm_virtual_network" "test" {
   location            = var.location
   resource_group_name = var.resourceGroup
   address_space       = ["10.140.0.0/16"]
-  # subnet {
-  #   name           = "core-routing"
-  #   address_prefix = "10.150.50.0/24"
-  # }
+  subnet {
+    name           = "core-routing"
+    address_prefix = "10.140.50.0/24"
+  }
   subnet {
     name           = "AzureFirewallSubnet"
     address_prefix = "10.140.100.0/24"
