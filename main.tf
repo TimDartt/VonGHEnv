@@ -7,7 +7,6 @@ locals {
 }
 
 
-
 # Create The Networking resource group
 
 # Define and build the Resource Groups

@@ -29,6 +29,7 @@ resource "azurerm_virtual_network" "test" {
   subnet {
     name           = "core-routing"
     address_prefix = "10.140.50.0/24"
+    tag            = merge(var.tags, { network = "{var.networkName}" })
   }
   subnet {
     name           = "AzureFirewallSubnet"
