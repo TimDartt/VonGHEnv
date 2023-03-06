@@ -95,3 +95,11 @@ variable "ResourceGroups" {
   location = "eastus" }]
 }
 
+variable "BaseNet" {
+  type        = string
+  description = "The base network address for the environment"
+}
+variable "Env" {
+  type        = string
+  description = "The environment being built"
+}
