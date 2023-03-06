@@ -40,6 +40,7 @@ module "vNets" {
   resourceGroup  = azurerm_resource_group.gh-networking.name
   networkName    = "scaffold-core"
   tags           = local.tags
+  BaseNet        = var.BaseNet
 }
 
 
