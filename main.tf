@@ -27,6 +27,7 @@ module "resourceGroup" {
 #first the resource group to contain the networking elements
 resource "azurerm_resource_group" "gh-networking" {
   name     = "gh-networking"
+  BaseNet  = var.BaseNet
   location = local.location
   tags     = local.tags
 }
