@@ -38,6 +38,7 @@ module "vNets" {
   secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
   resourceGroup  = azurerm_resource_group.gh-networking.name
   networkName    = "scaffold-core"
+  SubNets        = var.Scaffold-Core-SubNets                # the list of Subnets to create for the vNet
   tags           = local.tags
   BaseNet        = var.BaseNet
 }

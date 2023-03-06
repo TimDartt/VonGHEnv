@@ -26,77 +26,10 @@ resource "azurerm_virtual_network" "test" {
   location            = var.location
   resource_group_name = var.resourceGroup
   address_space       = ["${var.BaseNet}0.0/16"]
-  subnet {
-    name           = "core-routing"
-    address_prefix = "${var.BaseNet}50.0/24"
-  }
-  subnet {
-    name           = "AzureFirewallSubnet"
-    address_prefix = "${var.BaseNet}100.0/24"
-  }
-  subnet {
-    name           = "AzureFirewallManagementSubnet"
-    address_prefix = "10.140.90.0/24"
-  }
-  subnet {
-    name           = "gh-private-1"
-    address_prefix = "10.140.70.0/24"
-  }
-  subnet {
-    name           = "GatewaySubnet"
-    address_prefix = "10.140.0.0/24"
-  }
-  subnet {
-    name           = "GH-Scaffold-VM"
-    address_prefix = "10.140.95.0/24"
-  }
-  subnet {
-    name           = "gh-scaffold-lb-priv-backendservers"
-    address_prefix = "10.140.10.0/24"
-  }
-  subnet {
-    name           = "gh-scaffold-lb-priv-standard-internal"
-    address_prefix = "10.140.11.0/24"
-  }
-  subnet {
-    name           = "gh-scaffold-lb-priv-private-linkservice"
-    address_prefix = "10.140.12.0/24"
-  }
-  subnet {
-    name           = "gh-scaff-asg-frontend"
-    address_prefix = "10.140.20.0/24"
-  }
-  subnet {
-    name           = "gh-scaff-asg-controlplane"
-    address_prefix = "10.140.21.0/24"
-  }
-  subnet {
-    name           = "gh-scaff-asg-backend"
-    address_prefix = "10.140.22.0/24"
-  }
-  subnet {
-    name           = "gh-scaff-asg-connector"
-    address_prefix = "10.140.23.0/24"
-  }
-  subnet {
-    name           = "gh-public-1"
-    address_prefix = "10.140.60.0/24"
-  }
-  subnet {
-    name           = "gh-scaffold-private-dns-subnet"
-    address_prefix = "10.140.96.0/24"
-  }
-  subnet {
-    name           = "gh-scaffold-dns-internal"
-    address_prefix = "10.140.45.0/24"
-  }
-  subnet {
-    name           = "gh-scaffold-dns-outbound"
-    address_prefix = "10.140.46.0/24"
-  }
-  subnet {
-    name           = "gh-internal-1"
-    address_prefix = "10.140.80.0/24"
+  for_each            = { for index, item in var.SubNets : index => item } # loop through and build out the subnets :)
+  subnets {
+    name           = each.value.name
+    address_prefix = each.value.address_prefix
   }
 
   # subnet {

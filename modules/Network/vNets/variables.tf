@@ -50,3 +50,11 @@ variable "BaseNet" {
   type        = string
   description = "The base network address for the environment"
 }
+
+variable "SubNets" {
+  type = list(object({
+    name           = string
+    address_prefix = string
+  }))
+  description = "Subnets for the vNet"
+}
