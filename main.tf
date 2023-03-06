@@ -6,6 +6,10 @@ locals {
   }
 }
 
+output "testEnvVariables" {
+  value = "BaseNet = ${var.BaseNet}"
+}
+
 
 # Create The Networking resource group
 

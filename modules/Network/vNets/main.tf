@@ -28,11 +28,11 @@ resource "azurerm_virtual_network" "test" {
   address_space       = ["10.140.0.0/16"]
   subnet {
     name           = "core-routing"
-    address_prefix = "10.140.50.0/24"
+    address_prefix = "${var.BaseNet}0/24"
   }
   subnet {
     name           = "AzureFirewallSubnet"
-    address_prefix = "10.140.100.0/24"
+    address_prefix = "${var.BaseNet}0/24"
   }
   subnet {
     name           = "AzureFirewallManagementSubnet"
