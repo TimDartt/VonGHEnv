@@ -32,7 +32,7 @@ resource "azurerm_virtual_network" "test" {
   # }
   subnet {
     name           = "AzureFirewallSubnet"
-    address_prefix = "10.150.100.0/24"
+    address_prefix = "10.150.1.0/24"
   }
   # subnet {
   #   name           = "AzureFirewallManagementSubnet"
