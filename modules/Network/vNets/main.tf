@@ -26,12 +26,6 @@ resource "azurerm_virtual_network" "test" {
   location            = var.location
   resource_group_name = var.resourceGroup
   address_space       = ["${var.BaseNet}0.0/16"]
-  for_each            = { for index, item in var.SubNets : index => item } # loop through and build out the subnets :)
-  subnets {
-    name           = each.value.name
-    address_prefix = each.value.address_prefix
-  }
-
   # subnet {
   #   name           = "core-routing"
   #   address_prefix = "10.140.50.0/24"
@@ -39,7 +33,14 @@ resource "azurerm_virtual_network" "test" {
   # }
   #set the tags...
   tags = merge(var.tags, { environment = "GlobalHealth" })
+}
 
+resource "azurerm_subnet" "vNetSubNets" {
+  for_each             = { for index, item in var.SubNets : index => item }
+  resource_group_name  = var.resourceGroup
+  virtual_network_name = azurerm_virtual_network.test.name
+  name                 = each.value["name"]
+  address_prefixes     = ["${var.BaseNet}${each.value["address_prefix"]}"]
 }
 
 #test of a different approach
