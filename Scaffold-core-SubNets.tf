@@ -1,7 +1,7 @@
-variable "Scaffold-Core-SubNets" {
-  type        = map(any)
-  description = "All the subnets for Scaffold-core and their address prefixs"
-  default = {
+locals {
+  Scaffold-Core-SubNets = {
+    //description = "All the subnets for Scaffold-core and their address prefixs"
+    //    subnets = {
     sn1 = {
       name           = "core-routing"
       address_prefix = "50.0/24"
@@ -75,4 +75,5 @@ variable "Scaffold-Core-SubNets" {
       address_prefix = "80.0/24"
     }
   }
+  //  }
 }

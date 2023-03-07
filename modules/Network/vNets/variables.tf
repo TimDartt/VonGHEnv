@@ -52,6 +52,11 @@ variable "BaseNet" {
 }
 
 variable "SubNets" {
-  type        = map(any)
+  type = map(object({
+    name           = string
+    address_prefix = string
+  }))
   description = "Subnets for the vNet"
 }
+
+

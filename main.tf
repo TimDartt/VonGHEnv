@@ -1,16 +1,3 @@
-# start with a definition of some local variables we want to use:
-locals {
-  location = "eastus" # default location
-  tags = {
-    created = timestamp()
-  }
-}
-
-output "testEnvVariables" {
-  value = "BaseNet = ${var.BaseNet}"
-}
-
-
 # Create The Networking resource group
 
 # Define and build the Resource Groups
@@ -35,14 +22,15 @@ module "vNets" {
   source         = "./modules/Network/vNets"
   subNet         = "2"                                      # not currently in use
   security_rules = concat(var.SQLSecRules, var.IISSecRules) #these are loose at best. We still need to setup ASG's
-  secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
-  resourceGroup  = azurerm_resource_group.gh-networking.name
-  networkName    = "scaffold-core"
-  SubNets        = var.Scaffold-Core-SubNets                # the list of Subnets to create for the vNet
-  tags           = local.tags
-  BaseNet        = var.BaseNet
+  //security_rules = var.nsg-gh-scaffold-mssql-Rules
+  secGroupName  = "GlobalHealthNSGSecurity" #this will eventually need to be modified to reflect the subnet/environment
+  resourceGroup = azurerm_resource_group.gh-networking.name
+  networkName   = "scaffold-core"
+  //SubNets        = var.Scaffold-Core-SubNets # the list of Subnets to create for the vNet
+  SubNets = local.Scaffold-Core-SubNets # the list of Subnets to create for the vNet
+  tags    = local.tags
+  BaseNet = var.BaseNet
 }
-
 
 # module "Network_Building" {
 #   source         = "./modules/Network"

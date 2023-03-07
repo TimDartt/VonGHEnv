@@ -3,3 +3,12 @@ locals {
   baseName     = "${var.environment}${format("%02s", var.instance)}"
   baseInstance = format("%02s", var.instance)
 }
+
+locals {
+  location = "eastus" # default location
+  tags = {
+    created = timestamp()
+  }
+
+}
+
