@@ -7,11 +7,11 @@ variable "Scaffold-Core-SubNets" {
       address_prefix = "50.0/24"
     },
     sn2 = {
-      name           = "AzureFirewall,"
+      name           = "AzureFirewall"
       address_prefix = "100.0/24"
     },
     sn3 = {
-      name           = "AzureFirewallManagement,"
+      name           = "AzureFirewallManagement"
       address_prefix = "90.0/24"
     },
     sn4 = {
@@ -19,7 +19,7 @@ variable "Scaffold-Core-SubNets" {
       address_prefix = "70.0/24"
     },
     sn5 = {
-      name           = "Gateway,"
+      name           = "Gateway"
       address_prefix = "0.0/24"
     },
     sn6 = {
@@ -59,7 +59,7 @@ variable "Scaffold-Core-SubNets" {
       address_prefix = "60.0/24"
     },
     sn15 = {
-      name           = "gh-scaffold-private-dns-,"
+      name           = "gh-scaffold-private-dns"
       address_prefix = "96.0/24"
     },
     sn16 = {
