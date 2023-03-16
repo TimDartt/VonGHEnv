@@ -34,8 +34,6 @@ module "vNets" {
   //security_rules = var.nsg-gh-scaffold-mssql-Rules
   secGroupName = "GlobalHealthNSGSecurity" #this will eventually need to be modified to reflect the subnet/environment
 
-
-
   depends_on = [
     module.resourceGroup
   ]

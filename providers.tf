@@ -1,4 +1,5 @@
 # Configure the Azure providers used by these scripts
+## this is general boilplate that is needed for terraform
 
 # set up the initial definition of the space & prepare it to used with terraform cloud
 terraform {
