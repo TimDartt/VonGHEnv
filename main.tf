@@ -1,5 +1,6 @@
 # Create The Networking resource group
 
+
 # Define and build the Resource Groups
 # by prebuilding the resources and groups we can reference them later in the process without having to build them as an initial step
 module "resourceGroup" {
@@ -10,26 +11,34 @@ module "resourceGroup" {
   tags              = each.value.tags
 }
 
-#define the first network resource... 
-#first the resource group to contain the networking elements
-resource "azurerm_resource_group" "gh-networking" {
-  name     = "gh-networking"
-  location = local.location
-  tags     = local.tags
-}
+# #define the first network resource... 
+# #first the resource group to contain the networking elements
+# ** Testing Depends_on
+# resource "azurerm_resource_group" "gh-networking" {
+#   name     = "gh-networking"
+#   location = local.location
+#   tags     = local.tags
+# }
 # build any needed vNets
 module "vNets" {
-  source         = "./modules/Network/vNets"
-  subNet         = "2"                                      # not currently in use
+  source        = "./modules/Network/vNets"
+  networkName   = "scaffold-core"
+  location      = "eastus"
+  tags          = local.tags
+  BaseNet       = var.BaseNet
+  SubNets       = local.Scaffold-Core-SubNets # the list of Subnets to create for the vNet
+  resourceGroup = "gh-networking"
+
+
   security_rules = concat(var.SQLSecRules, var.IISSecRules) #these are loose at best. We still need to setup ASG's
   //security_rules = var.nsg-gh-scaffold-mssql-Rules
-  secGroupName  = "GlobalHealthNSGSecurity" #this will eventually need to be modified to reflect the subnet/environment
-  resourceGroup = azurerm_resource_group.gh-networking.name
-  networkName   = "scaffold-core"
-  //SubNets        = var.Scaffold-Core-SubNets # the list of Subnets to create for the vNet
-  SubNets = local.Scaffold-Core-SubNets # the list of Subnets to create for the vNet
-  tags    = local.tags
-  BaseNet = var.BaseNet
+  secGroupName = "GlobalHealthNSGSecurity" #this will eventually need to be modified to reflect the subnet/environment
+
+
+
+  depends_on = [
+    module.resourceGroup
+  ]
 }
 
 # module "Network_Building" {

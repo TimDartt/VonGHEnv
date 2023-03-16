@@ -19,6 +19,11 @@ variable "networkName" {
   description = "the name of the virtual network being being built"
 }
 
+variable "subNet" {
+  type        = string
+  description = "The subnet octet"
+
+}
 #The following allows for a list of rules to be created and feed into the Sec group creation
 variable "security_rules" {
   description = "A list of security rules"

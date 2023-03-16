@@ -1,37 +1,11 @@
-# first define the resource group and the rules that will be applied 
-# resource "azurerm_network_security_group" "envSecGroup" {
-#   name                = var.secGroupName
-#   location            = var.location
-#   resource_group_name = var.resourceGroup
 
-#   dynamic "security_rule" {
-#     for_each = var.security_rules
-#     content {
-#       name                       = security_rule.value.name
-#       priority                   = security_rule.value.priority
-#       direction                  = security_rule.value.direction
-#       access                     = security_rule.value.access
-#       protocol                   = security_rule.value.protocol
-#       source_port_range          = security_rule.value.source_port_range
-#       destination_port_range     = security_rule.value.destination_port_range
-#       source_address_prefix      = security_rule.value.source_address_prefix
-#       destination_address_prefix = security_rule.value.destination_address_prefix
-#     }
-#   }
-# }
-
-# now create the vNet using the security group defined above
+# # now create the vNet using the security group defined above
 resource "azurerm_virtual_network" "curvNnet" {
   name                = var.networkName
   location            = var.location
   resource_group_name = var.resourceGroup
   address_space       = ["${var.BaseNet}0.0/16"]
-  # subnet {
-  #   name           = "core-routing"
-  #   address_prefix = "10.140.50.0/24"
-  #   security_group = azurerm_network_security_group.envSecGroup.id
-  # }
-  #set the tags...
+  #set the tags...  
   tags = merge(var.tags, { environment = "GlobalHealth" })
 }
 
@@ -43,6 +17,12 @@ resource "azurerm_subnet" "vNetSubNets" {
   address_prefixes     = ["${var.BaseNet}${each.value["address_prefix"]}"]
 }
 
+# locals {
+#   ack = "AzureFirewallManagement"
+# }
+# output "Test" {
+#   value = "Subnet:${azurerm_subnet.vNetSubNets.subnet[locals.ack].name} "
+# }
 #test of a different approach
 # for_each = [for sr in var.security_rules : {
 #   name                       = sr.name

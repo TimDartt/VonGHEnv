@@ -92,6 +92,11 @@ variable "ResourceGroups" {
       tags = {
         source = "terraform"
       },
+    location = "eastus" },
+    { resource_group_name = "gh-networking"
+      tags = {
+        source = "terraform"
+      },
   location = "eastus" }]
 }
 
