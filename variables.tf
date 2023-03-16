@@ -1,4 +1,4 @@
-variable "environment" {
+svariable "environment" {
   type        = string
   default     = "Dev"
   description = "Dev target deployment area"
@@ -92,12 +92,14 @@ variable "ResourceGroups" {
       tags = {
         source = "terraform"
       },
-    location = "eastus" },
-    { resource_group_name = "gh-networking"
-      tags = {
-        source = "terraform"
-      },
-  location = "eastus" }]
+    location = "eastus" }
+
+    #, { resource_group_name = "gh-networking"
+    #   tags = {
+    #     source = "terraform"
+    #   },
+    # location = "eastus" }
+  ]
 }
 
 variable "BaseNet" {

@@ -14,11 +14,11 @@ module "resourceGroup" {
 # #define the first network resource... 
 # #first the resource group to contain the networking elements
 # ** Testing Depends_on
-# resource "azurerm_resource_group" "gh-networking" {
-#   name     = "gh-networking"
-#   location = local.location
-#   tags     = local.tags
-# }
+resource "azurerm_resource_group" "gh-networking" {
+  name     = "gh-networking"
+  location = local.location
+  tags     = local.tags
+}
 # build any needed vNets
 module "vNets" {
   source        = "./modules/Network/vNets"
