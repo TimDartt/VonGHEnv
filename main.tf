@@ -11,6 +11,22 @@ module "resourceGroup" {
   tags              = each.value.tags
 }
 
+# lets try a straight network build first ....
+
+resource "azurerm_virtual_network" "curvNnet" {
+  name                = "testNet"
+  location            = "EastUs"
+  resource_group_name = "gh-networking"
+  address_space       = ["${var.BaseNet}0.0/16"]
+  #set the tags...  
+  tags = merge(var.tags, { environment = "GlobalHealth" })
+  depends_on = [
+    module.resourceGroup
+  ]
+}
+
+
+
 # # #define the first network resource... 
 # # #first the resource group to contain the networking elements
 # # ** Testing Depends_on
