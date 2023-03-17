@@ -19,7 +19,6 @@ resource "azurerm_virtual_network" "curvNnet" {
   resource_group_name = "gh-networking"
   address_space       = ["${var.BaseNet}0.0/16"]
   #set the tags...  
-  tags = merge(var.tags, { environment = "GlobalHealth" })
   depends_on = [
     module.resourceGroup
   ]
