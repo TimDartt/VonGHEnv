@@ -11,19 +11,49 @@ module "resourceGroup" {
   tags              = each.value.tags
 }
 
-# lets try a straight network build first ....
 
-resource "azurerm_virtual_network" "curvNnet" {
-  name                = "testNet"
-  location            = "EastUs"
-  resource_group_name = "gh-networking"
-  address_space       = ["${var.BaseNet}0.0/16"]
-  #set the tags...  
+# lets try a straight network build first .... Worked
+# Try the Module Build next
+# resource "azurerm_virtual_network" "curvNnet" {
+#   name                = "scaffold-core"
+#   location            = "EastUs"
+#   resource_group_name = "gh-networking" # the gh-Networking RG was created in the resource group set - Checked - works
+#   address_space       = ["${var.BaseNet}0.0/16"]
+# #  SubNets             = locals.Scaffold-Core-SubNets
+#   #Depends on checks to see if the module has been run and completed before continuing 
+#   depends_on = [
+#     module.resourceGroup
+#   ]
+# }
+
+#Network Module Build
+module "Network_Building" {
+  source        = "./modules/Network/vNets"
+  resourceGroup = "gh-networking"
+  networkName   = "scaffold-core"
+  location      = "eastus"
+  AddressSpace  = "0.0/16"
+  BaseNet       = var.BaseNet
+  tags          = local.tags
+  #Depends on checks to see if the module has been run and completed before continuing 
   depends_on = [
     module.resourceGroup
   ]
+  #  security_rules = concat(var.SQLSecRules, var.IISSecRules) #these are loose at best. We still need to setup ASG's
+  #  secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
 }
 
+
+
+# now lets try building the NSG's ... this is a bit more complicated
+
+
+
+
+
+
+# Build RGS works
+# Build Straight Network Works
 
 
 # # #define the first network resource... 
