@@ -61,6 +61,7 @@ resource "azurerm_network_security_group" "example" {
       direction                  = security_rule.value.direction
       access                     = security_rule.value.access
       source_port_range          = security_rule.value.source_port_range
+      source_address_prefix      = security_rule.value.source_address_prefix
       destination_port_range     = security_rule.value.destination_port_range
       destination_address_prefix = security_rule.value.destination_address_prefix
     }
