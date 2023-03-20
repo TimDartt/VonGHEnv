@@ -7,6 +7,7 @@ locals {
   nsg-gh-scaffold-mssql-Rules = {
     r1 = {
       Name                       = "allow_tds_inbound"
+      protocol                   = "*"
       priority                   = "1000"
       direction                  = "Inbound"
       access                     = "Allow"
@@ -16,6 +17,7 @@ locals {
     },
     r2 = {
       Name                       = "allow_redirect_inbound"
+      protocol                   = "*"
       priority                   = "1100"
       direction                  = "Inbound"
       access                     = "Allow"
@@ -25,6 +27,7 @@ locals {
     },
     r3 = {
       Name                       = "allow_geodr_inbound"
+      protocol                   = "*"
       priority                   = "1200"
       direction                  = "Inbound"
       access                     = "Allow"

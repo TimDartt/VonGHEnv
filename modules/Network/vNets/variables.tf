@@ -41,14 +41,10 @@ variable "tags" {
 }
 
 
-
-
-
 # variable "secGroupName" {
 #   description = "Name of the sec group to create"
 #   type        = string
 # }
-
 
 # #The following allows for a list of rules to be created and feed into the Sec group creation
 # variable "security_rules" {

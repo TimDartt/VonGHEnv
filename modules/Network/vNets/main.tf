@@ -1,4 +1,3 @@
-
 # # now create the vNet using the security group defined above
 resource "azurerm_virtual_network" "curvNnet" {
   name                = var.networkName

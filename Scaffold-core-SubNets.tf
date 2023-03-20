@@ -91,11 +91,6 @@ locals {
       name           = "gh-internal-1"
       address_prefix = "80.0/24"
       nsg            = {}
-    },
-    sn19 = {
-      name           = "gh-test-10"
-      address_prefix = "81.0/24"
-      nsg            = {}
     }
   }
   //  }
