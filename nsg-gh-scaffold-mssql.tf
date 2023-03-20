@@ -12,6 +12,7 @@ locals {
       direction                  = "Inbound"
       access                     = "Allow"
       source_port_range          = "*"
+      source_address_prefix      = "*"
       destination_port_range     = "1433"
       destination_address_prefix = "10.150.70.0/24"
     },
@@ -22,6 +23,7 @@ locals {
       direction                  = "Inbound"
       access                     = "Allow"
       source_port_range          = "*"
+      source_address_prefix      = "*"
       destination_port_range     = "11000-11999"
       destination_address_prefix = "10.150.70.0/24"
     },
@@ -32,6 +34,7 @@ locals {
       direction                  = "Inbound"
       access                     = "Allow"
       source_port_range          = "*"
+      source_address_prefix      = "*"
       destination_port_range     = "5022"
       destination_address_prefix = "10.150.70.0/24"
     }
