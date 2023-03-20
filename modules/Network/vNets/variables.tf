@@ -24,6 +24,15 @@ variable "BaseNet" {
   description = "The base network address for the environment"
 }
 
+variable "SubNets" {
+  type = map(object({
+    name           = string
+    address_prefix = string
+  }))
+  description = "Subnets for the vNet"
+}
+
+
 
 variable "tags" {
   type        = map(string)
@@ -57,12 +66,5 @@ variable "tags" {
 #   }))
 # }
 
-# variable "SubNets" {
-#   type = map(object({
-#     name           = string
-#     address_prefix = string
-#   }))
-#   description = "Subnets for the vNet"
-# }
 
 

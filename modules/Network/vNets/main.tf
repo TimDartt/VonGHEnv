@@ -9,13 +9,13 @@ resource "azurerm_virtual_network" "curvNnet" {
   tags = merge(var.tags, { environment = "GlobalHealth" })
 }
 
-# resource "azurerm_subnet" "vNetSubNets" {
-#   for_each             = { for index, item in var.SubNets : index => item }
-#   resource_group_name  = var.resourceGroup
-#   virtual_network_name = azurerm_virtual_network.curvNnet.name
-#   name                 = each.value["name"]
-#   address_prefixes     = ["${var.BaseNet}${each.value["address_prefix"]}"]
-# }
+resource "azurerm_subnet" "vNetSubNets" {
+  for_each             = { for index, item in var.SubNets : index => item }
+  resource_group_name  = var.resourceGroup
+  virtual_network_name = azurerm_virtual_network.curvNnet.name
+  name                 = each.value["name"]
+  address_prefixes     = ["${var.BaseNet}${each.value["address_prefix"]}"]
+}
 
 # locals {
 #   ack = "AzureFirewallManagement"

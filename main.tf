@@ -26,7 +26,8 @@ module "resourceGroup" {
 #   ]
 # }
 
-#Network Module Build
+#Network Module Build -- Worked
+# adding subnet builds
 module "Network_Building" {
   source        = "./modules/Network/vNets"
   resourceGroup = "gh-networking"
@@ -35,6 +36,7 @@ module "Network_Building" {
   AddressSpace  = "0.0/16"
   BaseNet       = var.BaseNet
   tags          = local.tags
+  SubNets       = local.Scaffold-Core-SubNets
   #Depends on checks to see if the module has been run and completed before continuing 
   depends_on = [
     module.resourceGroup
