@@ -46,35 +46,18 @@ module "Network_Building" {
   # secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
 }
 
-# Build Network Security Groups 
-resource "azurerm_network_security_group" "example" {
-  # name                = var.NSGName
-  location            = "eastus"
-  resource_group_name = "gh-networking"
-  name                = "testNSG"
-  dynamic "security_rule" {
-    for_each = local.nsg-gh-scaffold-mssql-Rules
-    content {
-      name                       = security_rule.value.Name
-      protocol                   = security_rule.value.protocol
-      priority                   = security_rule.value.priority
-      direction                  = security_rule.value.direction
-      access                     = security_rule.value.access
-      source_port_range          = security_rule.value.source_port_range
-      source_address_prefix      = security_rule.value.source_address_prefix
-      destination_port_range     = security_rule.value.destination_port_range
-      destination_address_prefix = security_rule.value.destination_address_prefix
-    }
-  }
+# Build Network Security Groups - Works as a straight call
+# Move to a Module
+module "MsSqlNSG" {
+  source            = "./modules/Network/NSG"
+  NSGName           = "nsg-gh-scaffold-mssql"
+  Location          = "eastus"
+  ResourceGroupName = "gh-networking"
+  security_rules    = local.nsg-gh-scaffold-mssql-Rules
   depends_on = [
     module.resourceGroup
   ]
 }
-
-# now lets try building the NSG's ... this is a bit more complicated
-
-
-
 
 
 

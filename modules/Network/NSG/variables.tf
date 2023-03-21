@@ -1,15 +1,16 @@
 #The following allows for a list of rules to be created and feed into the Sec group creation
+
 variable "security_rules" {
   description = "A list of security rules"
   type = list(object({
     name                       = string
+    protocol                   = string
     priority                   = number
     direction                  = string
     access                     = string
-    protocol                   = string
     source_port_range          = string
-    destination_port_range     = string
     source_address_prefix      = string
+    destination_port_range     = string
     destination_address_prefix = string
   }))
 }
