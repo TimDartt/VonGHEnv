@@ -11,21 +11,6 @@ module "resourceGroup" {
   tags              = each.value.tags
 }
 
-
-# lets try a straight network build first .... Worked
-# Try the Module Build next
-# resource "azurerm_virtual_network" "curvNnet" {
-#   name                = "scaffold-core"
-#   location            = "EastUs"
-#   resource_group_name = "gh-networking" # the gh-Networking RG was created in the resource group set - Checked - works
-#   address_space       = ["${var.BaseNet}0.0/16"]
-# #  SubNets             = locals.Scaffold-Core-SubNets
-#   #Depends on checks to see if the module has been run and completed before continuing 
-#   depends_on = [
-#     module.resourceGroup
-#   ]
-# }
-
 #Network Module Build -- Worked
 # adding subnet builds -- Worked
 # adding Security Build
@@ -37,7 +22,7 @@ module "Network_Building" {
   AddressSpace  = "0.0/16"
   BaseNet       = var.BaseNet
   tags          = local.tags
-  SubNets       = local.Scaffold-Core-SubNets
+  SubNets       = var.Scaffold-Core-SubNets
   #Depends on checks to see if the module has been run and completed before continuing 
   depends_on = [
     module.resourceGroup
@@ -47,7 +32,8 @@ module "Network_Building" {
 }
 
 # Build Network Security Groups - Works as a straight call
-# Move to a Module
+# Move to a Module - Worked 
+# To use: We need to create a set of rules to apply, pass in with a Resource group that has been build afterwards, we need to create the link between the network and the security
 module "MsSqlNSG" {
   source            = "./modules/Network/NSG"
   NSGName           = "nsg-gh-scaffold-mssql"
@@ -58,6 +44,31 @@ module "MsSqlNSG" {
     module.resourceGroup
   ]
 }
+
+
+
+# #Lets build the Managed instance Sql Database
+# #create a sql Database :)
+# module "envSqlDatabase" {
+#   source       = "./modules/SqlServers"
+#   resoureGroup = azurerm_resource_group.vonGlobalHealhRG.name
+#   location     = azurerm_resource_group.vonGlobalHealhRG.location
+#   sqlName      = "globalhealth-sql${var.instance}" # note: We currently have this name in the existing Bonfire env. Names must be unique in azure (all of azure)
+#   sqlLogin     = "tdarttAdmin"
+#   sqlPassword  = "Squ!dD@ncer"
+#   databases    = tolist(var.dbNames) #List of Database to create
+#   tags = {
+#     "Owner"    = "VON"
+#     "Creator"  = "Tim"
+#     "instance" = "${var.instance}"
+#   }
+#   depends_on = [
+#     module.resourceGroup
+#   ]
+# }
+
+
+
 
 
 
@@ -110,20 +121,3 @@ module "MsSqlNSG" {
 # #   location = "eastus"
 # # }
 
-
-
-# # #create a sql Database :)
-# # module "envSqlDatabase" {
-# #   source       = "./modules/SqlServers"
-# #   resoureGroup = azurerm_resource_group.vonGlobalHealhRG.name
-# #   location     = azurerm_resource_group.vonGlobalHealhRG.location
-# #   sqlName      = "globalhealth-sql${var.instance}" # note: We currently have this name in the existing Bonfire env. Names must be unique in azure (all of azure)
-# #   sqlLogin     = "tdarttAdmin"
-# #   sqlPassword  = "Squ!dD@ncer"
-# #   databases    = tolist(var.dbNames)
-# #   tags = {
-# #     "Owner"    = "VON"
-# #     "Creator"  = "Tim"
-# #     "instance" = "${var.instance}"
-# #   }
-# # }
