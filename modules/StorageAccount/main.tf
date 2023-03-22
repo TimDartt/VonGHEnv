@@ -18,14 +18,15 @@ resource "azurerm_mssql_elasticpool" "sqlElasticPool" {
   location            = var.location
   server_name         = var.sqlName
   max_size_gb         = 50
+
   sku {
-    name     = "StandardPool"
-    tier     = "Standard"
-    capacity = 50
+    name     = "BasicPool"
+    tier     = "Basic"
+    capacity = 4
   }
 
   per_database_settings {
-    min_capacity = 1
+    min_capacity = 0.25
     max_capacity = 4
   }
 }
