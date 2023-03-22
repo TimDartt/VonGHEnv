@@ -32,8 +32,6 @@ variable "SubNets" {
   description = "Subnets for the vNet"
 }
 
-
-
 variable "tags" {
   type        = map(string)
   default     = {}

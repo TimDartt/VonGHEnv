@@ -31,9 +31,12 @@ module "Network_Building" {
   # secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
 }
 
+
 # Build Network Security Groups - Works as a straight call
 # Move to a Module - Worked 
 # To use: We need to create a set of rules to apply, pass in with a Resource group that has been build afterwards, we need to create the link between the network and the security
+# due to complexity and time factors we are going to build Each NSG/ASG this way.
+# doing this allows us to reuse and combine rule sets
 module "MsSqlNSG" {
   source            = "./modules/Network/NSG"
   NSGName           = "nsg-gh-scaffold-mssql"
@@ -44,6 +47,25 @@ module "MsSqlNSG" {
     module.resourceGroup
   ]
 }
+
+
+# output "test" {
+#   value = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id
+# }
+
+#Now to associate the NSG with a Subnet
+resource "azurerm_subnet_network_security_group_association" "nsga" {
+  subnet_id                 = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id # the vNet Module builds and passed back an object list containing each of the subnets
+  network_security_group_id = module.MsSqlNSG.NsgId                                       # this is the output of the NSG module
+  depends_on = [
+    module.resourceGroup,
+    module.MsSqlNSG
+  ]
+}
+
+
+# module.example_module.example_output.instances["instance-id"].name
+
 
 
 

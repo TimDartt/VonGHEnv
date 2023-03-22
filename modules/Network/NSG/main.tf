@@ -6,7 +6,7 @@
 #   security_rules = a set of rule to apply to the NSG
 #   
 
-resource "azurerm_network_security_group" "example" {
+resource "azurerm_network_security_group" "NSGSet" {
   name                = var.NSGName
   location            = var.Location
   resource_group_name = var.ResourceGroupName
