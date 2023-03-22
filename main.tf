@@ -18,7 +18,7 @@ module "Network_Building" {
   source        = "./modules/Network/vNets"
   resourceGroup = "gh-networking"
   networkName   = "scaffold-core"
-  location      = "eastus"
+  location      = var.location
   AddressSpace  = "0.0/16"
   BaseNet       = var.BaseNet
   tags          = local.tags
@@ -40,14 +40,13 @@ module "Network_Building" {
 module "MsSqlNSG" {
   source            = "./modules/Network/NSG"
   NSGName           = "nsg-gh-scaffold-mssql"
-  Location          = "eastus"
+  Location          = var.location
   ResourceGroupName = "gh-networking"
   security_rules    = local.nsg-gh-scaffold-mssql-Rules
   depends_on = [
     module.resourceGroup
   ]
 }
-
 
 # output "test" {
 #   value = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id
@@ -63,31 +62,24 @@ resource "azurerm_subnet_network_security_group_association" "nsga" {
   ]
 }
 
-
-# module.example_module.example_output.instances["instance-id"].name
-
-
-
-
-# #Lets build the Managed instance Sql Database
-# #create a sql Database :)
-# module "envSqlDatabase" {
-#   source       = "./modules/SqlServers"
-#   resoureGroup = azurerm_resource_group.vonGlobalHealhRG.name
-#   location     = azurerm_resource_group.vonGlobalHealhRG.location
-#   sqlName      = "globalhealth-sql${var.instance}" # note: We currently have this name in the existing Bonfire env. Names must be unique in azure (all of azure)
-#   sqlLogin     = "tdarttAdmin"
-#   sqlPassword  = "Squ!dD@ncer"
-#   databases    = tolist(var.dbNames) #List of Database to create
-#   tags = {
-#     "Owner"    = "VON"
-#     "Creator"  = "Tim"
-#     "instance" = "${var.instance}"
-#   }
-#   depends_on = [
-#     module.resourceGroup
-#   ]
-# }
+#Lets build the Managed instance Sql Database
+#create a sql Database :)
+module "envSqlDatabase" {
+  source       = "./modules/SqlServers"
+  resoureGroup = "gh-scaffolding-database"
+  location     = var.location
+  sqlName      = "gh-scaffold-mssql-${var.Env}" # note: We currently have this name in the existing Bonfire env. Names must be unique in azure (all of azure)
+  sqlLogin     = var.sqlLogin                   # "tdarttAdmin"
+  sqlPassword  = var.sqlPassword                # "Squ!dD@ncer"
+  databases    = tolist(var.dbNames)            # List of Database to create
+  tags = merge({
+    "Owner"   = "VON"
+    "Creator" = "Tim"
+  }, local.tags)
+  depends_on = [
+    module.resourceGroup
+  ]
+}
 
 
 
