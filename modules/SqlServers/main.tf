@@ -30,20 +30,12 @@ resource "azurerm_mssql_server" "sqlInstance" {
   tags                         = var.tags
 }
 
-# module "sqlStorage" {
-#   source              = "../StorageAccount"
-#   location            = var.location
-#   resource_group_name = var.resoureGroup
-#   sqlName             = azurerm_mssql_server.sqlInstance.name
-#   base_name           = "${replace(var.sqlName, "-", "")}str"
-# }
-
-# #loop though the databases and create whats passed
-# module "createDBs" {
-#   source    = "../SqlDatabases"
-#   sqlID     = azurerm_mssql_server.sqlInstance.id
-#   databases = var.databases
-# }
+#loop though the databases and create whats passed
+module "createDBs" {
+  source    = "../SqlDatabases"
+  sqlID     = azurerm_mssql_server.sqlInstance.id
+  databases = var.databases
+}
 
 resource "azurerm_mssql_firewall_rule" "sqlTraffic" {
   name             = "FirewallRule1"
@@ -58,22 +50,3 @@ resource "azurerm_mssql_firewall_rule" "sqlTraffic2" {
   start_ip_address = "66.211.134.66"
   end_ip_address   = "66.211.134.66"
 }
-
-
-# this works:
-# resource "azurerm_mssql_database" "test" {
-#   name           = "testSqlDB"
-#   server_id      = azurerm_mssql_server.sqlInstance.id
-#   collation      = "SQL_Latin1_General_CP1_CI_AS"
-#   license_type   = "LicenseIncluded"
-#   max_size_gb    = 2
-#   sku_name       = "S0"
-#   zone_redundant = false
-#   tags = {
-#     owner = "VON"
-#   }
-# }
-
-
-
-
