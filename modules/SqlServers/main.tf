@@ -1,34 +1,49 @@
 output "test" {
-  value = "Storage: ${var.sqlName}-storage"
+  value = "Storage: ${var.sqlName}storage"
 }
 output "test2" {
   value = "SqlName: ${var.sqlName}"
 }
 
+resource "random_string" "random" {
+  length  = 4
+  special = false
+  upper   = false
+}
+
+resource "azurerm_storage_account" "SqlStorageAccount" {
+  name                     = "SqlStore${random_string.random.result}"
+  resource_group_name      = var.resoureGroup
+  location                 = var.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+#define the server
 resource "azurerm_mssql_server" "sqlInstance" {
+  version                      = "12.0"
   name                         = var.sqlName
   resource_group_name          = var.resoureGroup
   location                     = var.location
-  version                      = "12.0"
   administrator_login          = var.sqlLogin
   administrator_login_password = var.sqlPassword
   tags                         = var.tags
 }
 
-module "sqlStorage" {
-  source              = "../StorageAccount"
-  location            = var.location
-  resource_group_name = var.resoureGroup
-  sqlName             = azurerm_mssql_server.sqlInstance.name
-  base_name           = "${replace(var.sqlName, "-", "")}str"
-}
+# module "sqlStorage" {
+#   source              = "../StorageAccount"
+#   location            = var.location
+#   resource_group_name = var.resoureGroup
+#   sqlName             = azurerm_mssql_server.sqlInstance.name
+#   base_name           = "${replace(var.sqlName, "-", "")}str"
+# }
 
-#loop though the databases and create whats passed
-module "createDBs" {
-  source    = "../SqlDatabases"
-  sqlID     = azurerm_mssql_server.sqlInstance.id
-  databases = var.databases
-}
+# #loop though the databases and create whats passed
+# module "createDBs" {
+#   source    = "../SqlDatabases"
+#   sqlID     = azurerm_mssql_server.sqlInstance.id
+#   databases = var.databases
+# }
 
 resource "azurerm_mssql_firewall_rule" "sqlTraffic" {
   name             = "FirewallRule1"
