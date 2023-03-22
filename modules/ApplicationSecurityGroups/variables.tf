@@ -2,6 +2,7 @@ variable "ASGGroups" {
   type = list(object({
     ASGName       = string
     ResourceGroup = string
+    tags          = map(string)
   }))
 }
 
