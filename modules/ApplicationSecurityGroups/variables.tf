@@ -4,6 +4,12 @@ variable "ASGGroups" {
     ResourceGroup = string
   }))
 }
+
+variable "location" {
+  type        = string
+  description = "Location where the resource should be created"
+}
+
 variable "tags" {
   type        = map(string)
   default     = {}
