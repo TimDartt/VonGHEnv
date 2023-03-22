@@ -81,7 +81,21 @@ module "envSqlDatabase" {
   ]
 }
 
+# build the set of azure application Security groups - they are actually quite simple...
 
+
+
+# # create the api management service
+# # since we will only need one.... don't make a module yet
+# resource "azurerm_api_management" "rApiManagement" {
+#   name                = "vonGHFunctions-apim"
+#   location            = var.location
+#   resource_group_name = "ghFunctions"
+#   publisher_name      = "Vermont Oxford Networks"
+#   publisher_email     = "company@terraform.io"
+
+#   sku_name = "Developer_1"
+# }
 
 
 
