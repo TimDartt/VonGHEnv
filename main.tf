@@ -82,6 +82,13 @@ module "envSqlDatabase" {
 }
 
 # build the set of azure application Security groups - they are actually quite simple...
+module "ASGcreation" {
+  source = "./modules/ApplicationSecurityGroups"
+
+
+}
+
+
 
 
 
