@@ -2,12 +2,17 @@
 Connect-AzAccount
 
 $outputfinal=@()
+#get all the subscriptions and loop through them
 foreach ( $Subscription in $(Get-AzSubscription| Where-Object {$_.State -ne "Disabled"}) )
 {
+# get the subscription
 Select-AzSubscription -SubscriptionId $Subscription.SubscriptionId
+#all the networks in the subscription 
 $nets=Get-AzVirtualNetwork
+#now loop through all the networks and prep for export
 foreach ($net in $nets)
 {
+#each subnet
 $snets=$net.Subnets
 foreach ($snet in $snets)
 {
@@ -22,5 +27,6 @@ $outputfinal += $outputtemp
 }
 }
 }
-#$outputfinal | Format-Table
+#Export the data to a csv table
+###$outputfinal | Format-Table
 $outputfinal | Export-Csv c:/temp/NETS_"$((Get-Date).ToString("yyyyMMdd_HHmmss")).csv" -NoTypeInformation
