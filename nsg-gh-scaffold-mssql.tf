@@ -11,7 +11,7 @@ locals {
       priority                   = "1000"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["1433"]
       destination_address_prefix = "10.150.70.0/24"
@@ -22,7 +22,7 @@ locals {
       priority                   = "1100"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["11000-11999"]
       destination_address_prefix = "10.150.70.0/24"
@@ -33,7 +33,7 @@ locals {
       priority                   = "1200"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["5022"]
       destination_address_prefix = "10.150.70.0/24"
@@ -44,7 +44,7 @@ locals {
       priority                   = "1000"
       direction                  = "Outbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["1433"]
       destination_address_prefix = "VirtualNetwork"
@@ -55,7 +55,7 @@ locals {
       priority                   = "1100"
       direction                  = "Outbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["11000-11999"]
       destination_address_prefix = "VirtualNetwork"
@@ -66,7 +66,7 @@ locals {
       priority                   = "1200"
       direction                  = "Outbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["5022"]
       destination_address_prefix = "VirtualNetwork"
@@ -77,7 +77,7 @@ locals {
       priority                   = "1300"
       direction                  = "Outbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["443"]
       destination_address_prefix = "VirtualNetwork"
@@ -88,7 +88,7 @@ locals {
       priority                   = "1400"
       direction                  = "Outbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["443"]
       destination_address_prefix = "AzureCloud"
@@ -99,7 +99,7 @@ locals {
       priority                   = "100"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["9000", "9003", "1438", "1440", "1452"]
       destination_address_prefix = "10.150.70.0/24"
@@ -110,7 +110,7 @@ locals {
       priority                   = "101"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["9000", "9003", "1440"]
       destination_address_prefix = "10.150.70.0/24"
@@ -121,7 +121,7 @@ locals {
       priority                   = "102"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["9000", "9003"]
       destination_address_prefix = "10.150.70.0/24"
@@ -132,9 +132,9 @@ locals {
       priority                   = "103"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "10.150.70.0/24"
     },
     {
@@ -143,9 +143,9 @@ locals {
       priority                   = "104"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "10.150.70.0/24"
     },
     {
@@ -154,7 +154,7 @@ locals {
       priority                   = "100"
       direction                  = "Outbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["443", "12000"]
       destination_address_prefix = "AzureCloud"
@@ -165,9 +165,9 @@ locals {
       priority                   = "101"
       direction                  = "Outbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "10.150.70.0/24"
     },
     {
@@ -176,7 +176,7 @@ locals {
       priority                   = "1300"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["1433"]
       destination_address_prefix = "*"
@@ -187,9 +187,9 @@ locals {
       priority                   = "1350"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "*"
     },
     {
@@ -198,7 +198,7 @@ locals {
       priority                   = "105"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
       destination_port_range     = ["1433", "3342"]
       destination_address_prefix = "*"
@@ -209,9 +209,9 @@ locals {
       priority                   = "4095"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "VirtualNetwork"
     },
     {
@@ -220,9 +220,9 @@ locals {
       priority                   = "4096"
       direction                  = "Inbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "*"
     },
     {
@@ -231,9 +231,9 @@ locals {
       priority                   = "4095"
       direction                  = "Inbound"
       access                     = "Deny"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "*"
     },
     {
@@ -242,9 +242,9 @@ locals {
       priority                   = "4095"
       direction                  = "Outbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "VirtualNetwork"
     },
     {
@@ -253,9 +253,9 @@ locals {
       priority                   = "4096"
       direction                  = "Outbound"
       access                     = "Allow"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "Internet"
     },
     {
@@ -264,11 +264,12 @@ locals {
       priority                   = "4095"
       direction                  = "Outbound"
       access                     = "Deny"
-      source_port_range          = [""]
+      source_port_range          = []
       source_address_prefix      = "*"
-      destination_port_range     = [""]
+      destination_port_range     = []
       destination_address_prefix = "*"
     }
+
 
   ]
 }
