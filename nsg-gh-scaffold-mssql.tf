@@ -566,6 +566,5 @@ locals {
       destination_port_range     = ["*"]
       destination_address_prefix = "*"
     }
-
   ]
 }
