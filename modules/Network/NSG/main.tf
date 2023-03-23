@@ -18,9 +18,9 @@ resource "azurerm_network_security_group" "NSGSet" {
       priority                   = security_rule.value.priority
       direction                  = security_rule.value.direction
       access                     = security_rule.value.access
-      source_port_range          = security_rule.value.source_port_range
+      source_port_ranges         = security_rule.value.source_port_range
       source_address_prefix      = security_rule.value.source_address_prefix
-      destination_port_range     = security_rule.value.destination_port_range
+      destination_port_ranges    = security_rule.value.destination_port_range
       destination_address_prefix = security_rule.value.destination_address_prefix
     }
   }

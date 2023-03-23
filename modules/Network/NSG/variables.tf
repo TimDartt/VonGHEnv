@@ -8,9 +8,9 @@ variable "security_rules" {
     priority                   = number
     direction                  = string
     access                     = string
-    source_port_range          = string
+    source_port_range          = list(string)
     source_address_prefix      = string
-    destination_port_range     = string
+    destination_port_range     = list(string)
     destination_address_prefix = string
   }))
 }
