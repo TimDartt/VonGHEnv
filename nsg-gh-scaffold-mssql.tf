@@ -6,26 +6,15 @@ GH-Scaffold MSSQL
 locals {
   nsg-gh-scaffold-mssql-Rules = [
     {
-      name                       = "allow_tds_inbound"
+      name                       = "allow_azurecloud_outbound"
       protocol                   = "*"
-      priority                   = "1000"
-      direction                  = "Inbound"
+      priority                   = "1400"
+      direction                  = "Outbound"
       access                     = "Allow"
       source_port_range          = ["0-65535"]
       source_address_prefix      = "*"
-      destination_port_range     = ["1433"]
-      destination_address_prefix = "10.150.70.0/24"
-    },
-    {
-      name                       = "allow_redirect_inbound"
-      protocol                   = "*"
-      priority                   = "1100"
-      direction                  = "Inbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["11000-11999"]
-      destination_address_prefix = "10.150.70.0/24"
+      destination_port_range     = ["443"]
+      destination_address_prefix = "AzureCloud"
     },
     {
       name                       = "allow_geodr_inbound"
@@ -39,28 +28,6 @@ locals {
       destination_address_prefix = "10.150.70.0/24"
     },
     {
-      name                       = "allow_linkedserver_outbound"
-      protocol                   = "*"
-      priority                   = "1000"
-      direction                  = "Outbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["1433"]
-      destination_address_prefix = "VirtualNetwork"
-    },
-    {
-      name                       = "allow_redirect_outbound"
-      protocol                   = "*"
-      priority                   = "1100"
-      direction                  = "Outbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["11000-11999"]
-      destination_address_prefix = "VirtualNetwork"
-    },
-    {
       name                       = "allow_geodr_outbound"
       protocol                   = "*"
       priority                   = "1200"
@@ -69,6 +36,17 @@ locals {
       source_port_range          = ["0-65535"]
       source_address_prefix      = "*"
       destination_port_range     = ["5022"]
+      destination_address_prefix = "VirtualNetwork"
+    },
+    {
+      name                       = "allow_linkedserver_outbound"
+      protocol                   = "*"
+      priority                   = "1000"
+      direction                  = "Outbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["1433"]
       destination_address_prefix = "VirtualNetwork"
     },
     {
@@ -83,25 +61,146 @@ locals {
       destination_address_prefix = "VirtualNetwork"
     },
     {
-      name                       = "allow_azurecloud_outbound"
+      name                       = "allow_redirect_inbound"
       protocol                   = "*"
-      priority                   = "1400"
-      direction                  = "Outbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["443"]
-      destination_address_prefix = "AzureCloud"
-    },
-    {
-      name                       = "Microsoft.Sql-managedInstances_UseOnly_mi-sqlmgmt-in-10-150-70-0-24-v10"
-      protocol                   = "*"
-      priority                   = "100"
+      priority                   = "1100"
       direction                  = "Inbound"
       access                     = "Allow"
       source_port_range          = ["0-65535"]
       source_address_prefix      = "*"
-      destination_port_range     = ["9000", "9003", "1438", "1440", "1452"]
+      destination_port_range     = ["11000-11999"]
+      destination_address_prefix = "10.150.70.0/24"
+    },
+    {
+      name                       = "allow_redirect_outbound"
+      protocol                   = "*"
+      priority                   = "1100"
+      direction                  = "Outbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["11000-11999"]
+      destination_address_prefix = "VirtualNetwork"
+    },
+    {
+      name                       = "allow_tds_inbound"
+      protocol                   = "*"
+      priority                   = "1000"
+      direction                  = "Inbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["1433"]
+      destination_address_prefix = "10.150.70.0/24"
+    },
+    {
+      name                       = "AllowAzureLoadBalancerInBound"
+      protocol                   = "*"
+      priority                   = "4095"
+      direction                  = "Inbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["0-65535"]
+      destination_address_prefix = "*"
+    },
+    {
+      name                       = "AllowCidrBlockCustomAnyInbound-DF-SQL"
+      protocol                   = "*"
+      priority                   = "1350"
+      direction                  = "Inbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["0-65535"]
+      destination_address_prefix = "*"
+    },
+    {
+      name                       = "AllowInternetOutBound"
+      protocol                   = "*"
+      priority                   = "4095"
+      direction                  = "Outbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["0-65535"]
+      destination_address_prefix = "Internet"
+    },
+    {
+      name                       = "AllowPublicSubnet1433Inbound"
+      protocol                   = "*"
+      priority                   = "1300"
+      direction                  = "Inbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["1433"]
+      destination_address_prefix = "*"
+    },
+    {
+      name                       = "AllowVnetInBound"
+      protocol                   = "*"
+      priority                   = "4094"
+      direction                  = "Inbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["0-65535"]
+      destination_address_prefix = "VirtualNetwork"
+    },
+    {
+      name                       = "AllowVnetOutBound"
+      protocol                   = "*"
+      priority                   = "4094"
+      direction                  = "Outbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["0-65535"]
+      destination_address_prefix = "VirtualNetwork"
+    },
+    {
+      name                       = "Data_Factory_Inbound"
+      protocol                   = "*"
+      priority                   = "105"
+      direction                  = "Inbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["1433", "3342"]
+      destination_address_prefix = "*"
+    },
+    {
+      name                       = "DenyAllInBound"
+      protocol                   = "*"
+      priority                   = "4096"
+      direction                  = "Inbound"
+      access                     = "Deny"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["0-65535"]
+      destination_address_prefix = "*"
+    },
+    {
+      name                       = "DenyAllOutBound"
+      protocol                   = "*"
+      priority                   = "4096"
+      direction                  = "Outbound"
+      access                     = "Deny"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["0-65535"]
+      destination_address_prefix = "*"
+    },
+    {
+      name                       = "Microsoft.Sql-managedInstances_UseOnly_mi-corppublic-in-10-150-70-0-24-v10"
+      protocol                   = "*"
+      priority                   = "102"
+      direction                  = "Inbound"
+      access                     = "Allow"
+      source_port_range          = ["0-65535"]
+      source_address_prefix      = "*"
+      destination_port_range     = ["9000", "9003"]
       destination_address_prefix = "10.150.70.0/24"
     },
     {
@@ -113,17 +212,6 @@ locals {
       source_port_range          = ["0-65535"]
       source_address_prefix      = "*"
       destination_port_range     = ["9000", "9003", "1440"]
-      destination_address_prefix = "10.150.70.0/24"
-    },
-    {
-      name                       = "Microsoft.Sql-managedInstances_UseOnly_mi-corppublic-in-10-150-70-0-24-v10"
-      protocol                   = "*"
-      priority                   = "102"
-      direction                  = "Inbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["9000", "9003"]
       destination_address_prefix = "10.150.70.0/24"
     },
     {
@@ -149,17 +237,6 @@ locals {
       destination_address_prefix = "10.150.70.0/24"
     },
     {
-      name                       = "Microsoft.Sql-managedInstances_UseOnly_mi-services-out-10-150-70-0-24-v10"
-      protocol                   = "*"
-      priority                   = "100"
-      direction                  = "Outbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["443", "12000"]
-      destination_address_prefix = "AzureCloud"
-    },
-    {
       name                       = "Microsoft.Sql-managedInstances_UseOnly_mi-internal-out-10-150-70-0-24-v10"
       protocol                   = "*"
       priority                   = "101"
@@ -171,103 +248,26 @@ locals {
       destination_address_prefix = "10.150.70.0/24"
     },
     {
-      name                       = "AllowPublicSubnet1433Inbound"
+      name                       = "Microsoft.Sql-managedInstances_UseOnly_mi-services-out-10-150-70-0-24-v10"
       protocol                   = "*"
-      priority                   = "1300"
-      direction                  = "Inbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["1433"]
-      destination_address_prefix = "*"
-    },
-    {
-      name                       = "AllowCidrBlockCustomAnyInbound-DF-SQL"
-      protocol                   = "*"
-      priority                   = "1350"
-      direction                  = "Inbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["0-65535"]
-      destination_address_prefix = "*"
-    },
-    {
-      name                       = "Data_Factory_Inbound"
-      protocol                   = "*"
-      priority                   = "105"
-      direction                  = "Inbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["1433", "3342"]
-      destination_address_prefix = "*"
-    },
-    {
-      name                       = "AllowVnetInBound"
-      protocol                   = "*"
-      priority                   = "4095"
-      direction                  = "Inbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["0-65535"]
-      destination_address_prefix = "VirtualNetwork"
-    },
-    {
-      name                       = "AllowAzureLoadBalancerInBound"
-      protocol                   = "*"
-      priority                   = "4096"
-      direction                  = "Inbound"
-      access                     = "Allow"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["0-65535"]
-      destination_address_prefix = "*"
-    },
-    {
-      name                       = "DenyAllInBound"
-      protocol                   = "*"
-      priority                   = "4095"
-      direction                  = "Inbound"
-      access                     = "Deny"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["0-65535"]
-      destination_address_prefix = "*"
-    },
-    {
-      name                       = "AllowVnetOutBound"
-      protocol                   = "*"
-      priority                   = "4095"
+      priority                   = "100"
       direction                  = "Outbound"
       access                     = "Allow"
       source_port_range          = ["0-65535"]
       source_address_prefix      = "*"
-      destination_port_range     = ["0-65535"]
-      destination_address_prefix = "VirtualNetwork"
+      destination_port_range     = ["443", "12000"]
+      destination_address_prefix = "AzureCloud"
     },
     {
-      name                       = "AllowInternetOutBound"
+      name                       = "Microsoft.Sql-managedInstances_UseOnly_mi-sqlmgmt-in-10-150-70-0-24-v10"
       protocol                   = "*"
-      priority                   = "4096"
-      direction                  = "Outbound"
+      priority                   = "100"
+      direction                  = "Inbound"
       access                     = "Allow"
       source_port_range          = ["0-65535"]
       source_address_prefix      = "*"
-      destination_port_range     = ["0-65535"]
-      destination_address_prefix = "Internet"
-    },
-    {
-      name                       = "DenyAllOutBound"
-      protocol                   = "*"
-      priority                   = "4095"
-      direction                  = "Outbound"
-      access                     = "Deny"
-      source_port_range          = ["0-65535"]
-      source_address_prefix      = "*"
-      destination_port_range     = ["0-65535"]
-      destination_address_prefix = "*"
+      destination_port_range     = ["9000", "9003", "1438", "1440", "1452"]
+      destination_address_prefix = "10.150.70.0/24"
     }
 
   ]
