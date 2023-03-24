@@ -32,35 +32,75 @@ module "Network_Building" {
 }
 
 
+#### REGION NSG Builds 
 # Build Network Security Groups - Works as a straight call
 # Move to a Module - Worked 
 # To use: We need to create a set of rules to apply, pass in with a Resource group that has been build afterwards, we need to create the link between the network and the security
 # due to complexity and time factors we are going to build Each NSG/ASG this way.
 # doing this allows us to reuse and combine rule sets
-module "MsSqlNSG" {
+# TODO: come back and figure out how to loop these as a list pass in the root main.tf
+module "NSG-Sql" {
   source            = "./modules/Network/NSG"
   NSGName           = "nsg-gh-scaffold-mssql"
   Location          = var.location
   ResourceGroupName = "gh-networking"
-  security_rules    = local.nsg-gh-scaffold-mssql-Rules
+  security_rules    = var.nsg-gh-scaffold-mssql-Rules
   depends_on = [
     module.resourceGroup
   ]
 }
 
-# output "test" {
-#   value = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id
-# }
-
-#Now to associate the NSG with a Subnet
-resource "azurerm_subnet_network_security_group_association" "nsga" {
-  subnet_id                 = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id # the vNet Module builds and passed back an object list containing each of the subnets
-  network_security_group_id = module.MsSqlNSG.NsgId                                       # this is the output of the NSG module
+module "NSG-SSMS" {
+  source            = "./modules/Network/NSG"
+  NSGName           = "gh-ssms-nsg"
+  Location          = var.location
+  ResourceGroupName = "gh-scaffold-workstations"
+  security_rules    = var.gh-ssms-nsg
   depends_on = [
-    module.resourceGroup,
-    module.MsSqlNSG
+    module.resourceGroup
   ]
 }
+
+
+module "NSG-LoadBalancer" {
+  source            = "./modules/Network/NSG"
+  NSGName           = "gh-scaff-loadbalancer-instanceone-nsg"
+  Location          = var.location
+  ResourceGroupName = "gh-scaffold-loadbalancer"
+  security_rules    = var.gh-scaff-loadbalancer-instanceone-nsg
+  depends_on = [
+    module.resourceGroup
+  ]
+}
+
+module "NSG-Monitor" {
+  source            = "./modules/Network/NSG"
+  NSGName           = "von-gh-scaffold-monitor-nsg"
+  Location          = var.location
+  ResourceGroupName = "gh-scaffold-workstations"
+  security_rules    = var.von-gh-scaffold-monitor-nsg
+  depends_on = [
+    module.resourceGroup
+  ]
+}
+
+#Now to associate the NSG with the appropriate resources
+# the sql nsg is applied to a subnet  but no nics
+resource "azurerm_subnet_network_security_group_association" "NSGAssociationSql" {
+  subnet_id                 = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id # the vNet Module builds and passed back an object list containing each of the subnets
+  network_security_group_id = module.NSG-Sql.NsgId                                        # this is the output of the NSG module
+  depends_on = [
+    module.resourceGroup,
+    module.NSG-Sql
+  ]
+}
+
+#TODO: gh-ssms-nsg is associated with a Network interface - return and fix after its modeled.
+#TODO: von-gh-scaffold-monitor-nsg doesn't seem to be associated with anything?
+#TODO: gh-scaff-loadbalancer-instanceone-nsg doesn't seem to be associated with anything?
+
+
+#### END REGION NSG Builds 
 
 #Lets build the Managed instance Sql Database
 #create a sql Database :)

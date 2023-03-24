@@ -2,9 +2,20 @@
 Define the network security group rules for the 
 GH-Scaffold MSSQL
 */
-
-locals {
-  nsg-gh-scaffold-mssql-Rules = [
+variable "nsg-gh-scaffold-mssql-Rules" {
+  description = "A list of security rules"
+  type = list(object({
+    name                       = string
+    protocol                   = string
+    priority                   = number
+    direction                  = string
+    access                     = string
+    source_port_range          = list(string)
+    source_address_prefix      = string
+    destination_port_range     = list(string)
+    destination_address_prefix = string
+  }))
+  default = [
     {
       name                       = "allow_azurecloud_outbound"
       protocol                   = "*"

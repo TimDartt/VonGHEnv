@@ -9,9 +9,9 @@ gh-scaff-loadbalancer-instanceone-nsg,eastus,SSH,*,,*,Allow,300,Inbound,*,,22,gh
  destination_port_range = [""22""]
  destination_address_prefix=""*""
 },",  
-gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4096,Inbound,VirtualNetwork,,*,gh-scaffold-loadbalancer,"{
+gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4094,Inbound,VirtualNetwork,,*,gh-scaffold-loadbalancer,"{
  name =""AllowVnetInBound"" protocol = ""*""
- priority =""4096""
+ priority =""4094""
  direction = ""Inbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -19,9 +19,9 @@ gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowVnetInBound,VirtualNetwork,,*,
  destination_port_range = [""0-65535""]
  destination_address_prefix=""VirtualNetwork""
 },",
-gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowAzureLoadBalancerInBound,AzureLoadBalancer,,*,Allow,4096,Inbound,*,,*,gh-scaffold-loadbalancer,"{
+gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowAzureLoadBalancerInBound,AzureLoadBalancer,,*,Allow,4095,Inbound,*,,*,gh-scaffold-loadbalancer,"{
  name =""AllowAzureLoadBalancerInBound"" protocol = ""*""
- priority =""4096""
+ priority =""4095""
  direction = ""Inbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -39,9 +39,9 @@ gh-scaff-loadbalancer-instanceone-nsg,eastus,DenyAllInBound,*,,*,Deny,4096,Inbou
  destination_port_range = [""0-65535""]
  destination_address_prefix=""*""
 },",
-gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,4096,Outbound,VirtualNetwork,,*,gh-scaffold-loadbalancer,"{
+gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,4094,Outbound,VirtualNetwork,,*,gh-scaffold-loadbalancer,"{
  name =""AllowVnetOutBound"" protocol = ""*""
- priority =""4096""
+ priority =""4094""
  direction = ""Outbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -49,9 +49,9 @@ gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowVnetOutBound,VirtualNetwork,,*
  destination_port_range = [""0-65535""]
  destination_address_prefix=""VirtualNetwork""
 },",
-gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowInternetOutBound,*,,*,Allow,4096,Outbound,Internet,,*,gh-scaffold-loadbalancer,"{
+gh-scaff-loadbalancer-instanceone-nsg,eastus,AllowInternetOutBound,*,,*,Allow,4095,Outbound,Internet,,*,gh-scaffold-loadbalancer,"{
  name =""AllowInternetOutBound"" protocol = ""*""
- priority =""4096""
+ priority =""4095""
  direction = ""Outbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -109,9 +109,9 @@ gh-ssms-nsg,eastus,AllowCidrBlockRDPInbound-BGP2,66.211.134.66/32,,*,Allow,340,I
  destination_port_range = [""3389""]
  destination_address_prefix=""*""
 },",
-gh-ssms-nsg,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4096,Inbound,VirtualNetwork,,*,gh-scaffold-workstations,"{
+gh-ssms-nsg,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4094,Inbound,VirtualNetwork,,*,gh-scaffold-workstations,"{
  name =""AllowVnetInBound"" protocol = ""*""
- priority =""4096""
+ priority =""4094""
  direction = ""Inbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -119,9 +119,9 @@ gh-ssms-nsg,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4096,Inbound,Virtual
  destination_port_range = [""0-65535""]
  destination_address_prefix=""VirtualNetwork""
 },",
-gh-ssms-nsg,eastus,AllowAzureLoadBalancerInBound,AzureLoadBalancer,,*,Allow,4096,Inbound,*,,*,gh-scaffold-workstations,"{
+gh-ssms-nsg,eastus,AllowAzureLoadBalancerInBound,AzureLoadBalancer,,*,Allow,4095,Inbound,*,,*,gh-scaffold-workstations,"{
  name =""AllowAzureLoadBalancerInBound"" protocol = ""*""
- priority =""4096""
+ priority =""4095""
  direction = ""Inbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -139,9 +139,9 @@ gh-ssms-nsg,eastus,DenyAllInBound,*,,*,Deny,4096,Inbound,*,,*,gh-scaffold-workst
  destination_port_range = [""0-65535""]
  destination_address_prefix=""*""
 },",
-gh-ssms-nsg,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,4096,Outbound,VirtualNetwork,,*,gh-scaffold-workstations,"{
+gh-ssms-nsg,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,4094,Outbound,VirtualNetwork,,*,gh-scaffold-workstations,"{
  name =""AllowVnetOutBound"" protocol = ""*""
- priority =""4096""
+ priority =""4094""
  direction = ""Outbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -149,9 +149,9 @@ gh-ssms-nsg,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,4096,Outbound,Virtu
  destination_port_range = [""0-65535""]
  destination_address_prefix=""VirtualNetwork""
 },",
-gh-ssms-nsg,eastus,AllowInternetOutBound,*,,*,Allow,4096,Outbound,Internet,,*,gh-scaffold-workstations,"{
+gh-ssms-nsg,eastus,AllowInternetOutBound,*,,*,Allow,4095,Outbound,Internet,,*,gh-scaffold-workstations,"{
  name =""AllowInternetOutBound"" protocol = ""*""
- priority =""4096""
+ priority =""4095""
  direction = ""Outbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -169,25 +169,15 @@ gh-ssms-nsg,eastus,DenyAllOutBound,*,,*,Deny,4096,Outbound,*,,*,gh-scaffold-work
  destination_port_range = [""0-65535""]
  destination_address_prefix=""*""
 },",
-nsg-gh-scaffold-mssql,eastus,allow_tds_inbound,VirtualNetwork,,*,Allow,1000,Inbound,10.150.70.0/24,,1433,gh-networking,"{
- name =""allow_tds_inbound"" protocol = ""*""
- priority =""1000""
- direction = ""Inbound""
+nsg-gh-scaffold-mssql,eastus,allow_azurecloud_outbound,VirtualNetwork,,*,Allow,1400,Outbound,AzureCloud,,443,gh-networking,"{
+ name =""allow_azurecloud_outbound"" protocol = ""*""
+ priority =""1400""
+ direction = ""Outbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
  source_address_prefix = ""*""
- destination_port_range = [""1433""]
- destination_address_prefix=""10.150.70.0/24""
-},",
-nsg-gh-scaffold-mssql,eastus,allow_redirect_inbound,VirtualNetwork,,*,Allow,1100,Inbound,10.150.70.0/24,,11000-11999,gh-networking,"{
- name =""allow_redirect_inbound"" protocol = ""*""
- priority =""1100""
- direction = ""Inbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""11000-11999""]
- destination_address_prefix=""10.150.70.0/24""
+ destination_port_range = [""443""]
+ destination_address_prefix=""AzureCloud""
 },",
 nsg-gh-scaffold-mssql,eastus,allow_geodr_inbound,VirtualNetwork,,*,Allow,1200,Inbound,10.150.70.0/24,,5022,gh-networking,"{
  name =""allow_geodr_inbound"" protocol = ""*""
@@ -199,26 +189,6 @@ nsg-gh-scaffold-mssql,eastus,allow_geodr_inbound,VirtualNetwork,,*,Allow,1200,In
  destination_port_range = [""5022""]
  destination_address_prefix=""10.150.70.0/24""
 },",
-nsg-gh-scaffold-mssql,eastus,allow_linkedserver_outbound,10.150.70.0/24,,*,Allow,1000,Outbound,VirtualNetwork,,1433,gh-networking,"{
- name =""allow_linkedserver_outbound"" protocol = ""*""
- priority =""1000""
- direction = ""Outbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""1433""]
- destination_address_prefix=""VirtualNetwork""
-},",
-nsg-gh-scaffold-mssql,eastus,allow_redirect_outbound,10.150.70.0/24,,*,Allow,1100,Outbound,VirtualNetwork,,11000-11999,gh-networking,"{
- name =""allow_redirect_outbound"" protocol = ""*""
- priority =""1100""
- direction = ""Outbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""11000-11999""]
- destination_address_prefix=""VirtualNetwork""
-},",
 nsg-gh-scaffold-mssql,eastus,allow_geodr_outbound,10.150.70.0/24,,*,Allow,1200,Outbound,VirtualNetwork,,5022,gh-networking,"{
  name =""allow_geodr_outbound"" protocol = ""*""
  priority =""1200""
@@ -227,6 +197,16 @@ nsg-gh-scaffold-mssql,eastus,allow_geodr_outbound,10.150.70.0/24,,*,Allow,1200,O
  source_port_range = [""0-65535""]
  source_address_prefix = ""*""
  destination_port_range = [""5022""]
+ destination_address_prefix=""VirtualNetwork""
+},",
+nsg-gh-scaffold-mssql,eastus,allow_linkedserver_outbound,10.150.70.0/24,,*,Allow,1000,Outbound,VirtualNetwork,,1433,gh-networking,"{
+ name =""allow_linkedserver_outbound"" protocol = ""*""
+ priority =""1000""
+ direction = ""Outbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""1433""]
  destination_address_prefix=""VirtualNetwork""
 },",
 nsg-gh-scaffold-mssql,eastus,allow_privatelink_outbound,10.150.70.0/24,,*,Allow,1300,Outbound,VirtualNetwork,,443,gh-networking,"{
@@ -239,24 +219,134 @@ nsg-gh-scaffold-mssql,eastus,allow_privatelink_outbound,10.150.70.0/24,,*,Allow,
  destination_port_range = [""443""]
  destination_address_prefix=""VirtualNetwork""
 },",
-nsg-gh-scaffold-mssql,eastus,allow_azurecloud_outbound,VirtualNetwork,,*,Allow,1400,Outbound,AzureCloud,,443,gh-networking,"{
- name =""allow_azurecloud_outbound"" protocol = ""*""
- priority =""1400""
- direction = ""Outbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""443""]
- destination_address_prefix=""AzureCloud""
-},",
-nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-sqlmgmt-in-10-150-70-0-24-v10,SqlManagement,,*,Allow,100,Inbound,10.150.70.0/24,,9000 9003 1438 1440 1452,gh-networking,"{
- name =""Microsoft.Sql-managedInstances_UseOnly_mi-sqlmgmt-in-10-150-70-0-24-v10"" protocol = ""*""
- priority =""100""
+nsg-gh-scaffold-mssql,eastus,allow_redirect_inbound,VirtualNetwork,,*,Allow,1100,Inbound,10.150.70.0/24,,11000-11999,gh-networking,"{
+ name =""allow_redirect_inbound"" protocol = ""*""
+ priority =""1100""
  direction = ""Inbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
  source_address_prefix = ""*""
- destination_port_range = [""9000"",""9003"",""1438"",""1440"",""1452""]
+ destination_port_range = [""11000-11999""]
+ destination_address_prefix=""10.150.70.0/24""
+},",
+nsg-gh-scaffold-mssql,eastus,allow_redirect_outbound,10.150.70.0/24,,*,Allow,1100,Outbound,VirtualNetwork,,11000-11999,gh-networking,"{
+ name =""allow_redirect_outbound"" protocol = ""*""
+ priority =""1100""
+ direction = ""Outbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""11000-11999""]
+ destination_address_prefix=""VirtualNetwork""
+},",
+nsg-gh-scaffold-mssql,eastus,allow_tds_inbound,VirtualNetwork,,*,Allow,1000,Inbound,10.150.70.0/24,,1433,gh-networking,"{
+ name =""allow_tds_inbound"" protocol = ""*""
+ priority =""1000""
+ direction = ""Inbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""1433""]
+ destination_address_prefix=""10.150.70.0/24""
+},",
+nsg-gh-scaffold-mssql,eastus,AllowAzureLoadBalancerInBound,AzureLoadBalancer,,*,Allow,4095,Inbound,*,,*,gh-networking,"{
+ name =""AllowAzureLoadBalancerInBound"" protocol = ""*""
+ priority =""4095""
+ direction = ""Inbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""0-65535""]
+ destination_address_prefix=""*""
+},",
+nsg-gh-scaffold-mssql,eastus,AllowCidrBlockCustomAnyInbound-DF-SQL,10.150.60.0/24,,*,Allow,1350,Inbound,*,,*,gh-networking,"{
+ name =""AllowCidrBlockCustomAnyInbound-DF-SQL"" protocol = ""*""
+ priority =""1350""
+ direction = ""Inbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""0-65535""]
+ destination_address_prefix=""*""
+},",
+nsg-gh-scaffold-mssql,eastus,AllowInternetOutBound,*,,*,Allow,4095,Outbound,Internet,,*,gh-networking,"{
+ name =""AllowInternetOutBound"" protocol = ""*""
+ priority =""4095""
+ direction = ""Outbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""0-65535""]
+ destination_address_prefix=""Internet""
+},",
+nsg-gh-scaffold-mssql,eastus,AllowPublicSubnet1433Inbound,10.150.60.0/24,,*,Allow,1300,Inbound,*,,1433,gh-networking,"{
+ name =""AllowPublicSubnet1433Inbound"" protocol = ""*""
+ priority =""1300""
+ direction = ""Inbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""1433""]
+ destination_address_prefix=""*""
+},",
+nsg-gh-scaffold-mssql,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4094,Inbound,VirtualNetwork,,*,gh-networking,"{
+ name =""AllowVnetInBound"" protocol = ""*""
+ priority =""4094""
+ direction = ""Inbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""0-65535""]
+ destination_address_prefix=""VirtualNetwork""
+},",
+nsg-gh-scaffold-mssql,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,4094,Outbound,VirtualNetwork,,*,gh-networking,"{
+ name =""AllowVnetOutBound"" protocol = ""*""
+ priority =""4094""
+ direction = ""Outbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""0-65535""]
+ destination_address_prefix=""VirtualNetwork""
+},",
+nsg-gh-scaffold-mssql,eastus,Data_Factory_Inbound,,gh-scaffold-df,*,Allow,105,Inbound,*,,1433 3342,gh-networking,"{
+ name =""Data_Factory_Inbound"" protocol = ""*""
+ priority =""105""
+ direction = ""Inbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""1433"",""3342""]
+ destination_address_prefix=""*""
+},",
+nsg-gh-scaffold-mssql,eastus,DenyAllInBound,*,,*,Deny,4096,Inbound,*,,*,gh-networking,"{
+ name =""DenyAllInBound"" protocol = ""*""
+ priority =""4096""
+ direction = ""Inbound""
+ access = ""Deny""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""0-65535""]
+ destination_address_prefix=""*""
+},",
+nsg-gh-scaffold-mssql,eastus,DenyAllOutBound,*,,*,Deny,4096,Outbound,*,,*,gh-networking,"{
+ name =""DenyAllOutBound"" protocol = ""*""
+ priority =""4096""
+ direction = ""Outbound""
+ access = ""Deny""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""0-65535""]
+ destination_address_prefix=""*""
+},",
+nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-corppublic-in-10-150-70-0-24-v10,CorpNetPublic,,*,Allow,102,Inbound,10.150.70.0/24,,9000 9003,gh-networking,"{
+ name =""Microsoft.Sql-managedInstances_UseOnly_mi-corppublic-in-10-150-70-0-24-v10"" protocol = ""*""
+ priority =""102""
+ direction = ""Inbound""
+ access = ""Allow""
+ source_port_range = [""0-65535""]
+ source_address_prefix = ""*""
+ destination_port_range = [""9000"",""9003""]
  destination_address_prefix=""10.150.70.0/24""
 },",
 nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-corpsaw-in-10-150-70-0-24-v10,CorpNetSaw,,*,Allow,101,Inbound,10.150.70.0/24,,9000 9003 1440,gh-networking,"{
@@ -267,16 +357,6 @@ nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-corpsaw-i
  source_port_range = [""0-65535""]
  source_address_prefix = ""*""
  destination_port_range = [""9000"",""9003"",""1440""]
- destination_address_prefix=""10.150.70.0/24""
-},",
-nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-corppublic-in-10-150-70-0-24-v10,CorpNetPublic,,*,Allow,102,Inbound,10.150.70.0/24,,9000 9003,gh-networking,"{
- name =""Microsoft.Sql-managedInstances_UseOnly_mi-corppublic-in-10-150-70-0-24-v10"" protocol = ""*""
- priority =""102""
- direction = ""Inbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""9000"",""9003""]
  destination_address_prefix=""10.150.70.0/24""
 },",
 nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-healthprobe-in-10-150-70-0-24-v10,AzureLoadBalancer,,*,Allow,103,Inbound,10.150.70.0/24,,*,gh-networking,"{
@@ -299,16 +379,6 @@ nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-internal-
  destination_port_range = [""0-65535""]
  destination_address_prefix=""10.150.70.0/24""
 },",
-nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-services-out-10-150-70-0-24-v10,10.150.70.0/24,,*,Allow,100,Outbound,AzureCloud,,443 12000,gh-networking,"{
- name =""Microsoft.Sql-managedInstances_UseOnly_mi-services-out-10-150-70-0-24-v10"" protocol = ""*""
- priority =""100""
- direction = ""Outbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""443"",""12000""]
- destination_address_prefix=""AzureCloud""
-},",
 nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-internal-out-10-150-70-0-24-v10,10.150.70.0/24,,*,Allow,101,Outbound,10.150.70.0/24,,*,gh-networking,"{
  name =""Microsoft.Sql-managedInstances_UseOnly_mi-internal-out-10-150-70-0-24-v10"" protocol = ""*""
  priority =""101""
@@ -319,95 +389,25 @@ nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-internal-
  destination_port_range = [""0-65535""]
  destination_address_prefix=""10.150.70.0/24""
 },",
-nsg-gh-scaffold-mssql,eastus,AllowPublicSubnet1433Inbound,10.150.60.0/24,,*,Allow,1300,Inbound,*,,1433,gh-networking,"{
- name =""AllowPublicSubnet1433Inbound"" protocol = ""*""
- priority =""1300""
- direction = ""Inbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""1433""]
- destination_address_prefix=""*""
-},",
-nsg-gh-scaffold-mssql,eastus,AllowCidrBlockCustomAnyInbound-DF-SQL,10.150.60.0/24,,*,Allow,1350,Inbound,*,,*,gh-networking,"{
- name =""AllowCidrBlockCustomAnyInbound-DF-SQL"" protocol = ""*""
- priority =""1350""
- direction = ""Inbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""0-65535""]
- destination_address_prefix=""*""
-},",
-nsg-gh-scaffold-mssql,eastus,Data_Factory_Inbound,,gh-scaffold-df,*,Allow,105,Inbound,*,,1433 3342,gh-networking,"{
- name =""Data_Factory_Inbound"" protocol = ""*""
- priority =""105""
- direction = ""Inbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""1433"",""3342""]
- destination_address_prefix=""*""
-},",
-nsg-gh-scaffold-mssql,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4095,Inbound,VirtualNetwork,,*,gh-networking,"{
- name =""AllowVnetInBound"" protocol = ""*""
- priority =""4095""
- direction = ""Inbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""0-65535""]
- destination_address_prefix=""VirtualNetwork""
-},",
-nsg-gh-scaffold-mssql,eastus,AllowAzureLoadBalancerInBound,AzureLoadBalancer,,*,Allow,4096,Inbound,*,,*,gh-networking,"{
- name =""AllowAzureLoadBalancerInBound"" protocol = ""*""
- priority =""4096""
- direction = ""Inbound""
- access = ""Allow""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""0-65535""]
- destination_address_prefix=""*""
-},",
-nsg-gh-scaffold-mssql,eastus,DenyAllInBound,*,,*,Deny,4095,Inbound,*,,*,gh-networking,"{
- name =""DenyAllInBound"" protocol = ""*""
- priority =""4095""
- direction = ""Inbound""
- access = ""Deny""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""0-65535""]
- destination_address_prefix=""*""
-},",
-nsg-gh-scaffold-mssql,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,4095,Outbound,VirtualNetwork,,*,gh-networking,"{
- name =""AllowVnetOutBound"" protocol = ""*""
- priority =""4095""
+nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-services-out-10-150-70-0-24-v10,10.150.70.0/24,,*,Allow,100,Outbound,AzureCloud,,443 12000,gh-networking,"{
+ name =""Microsoft.Sql-managedInstances_UseOnly_mi-services-out-10-150-70-0-24-v10"" protocol = ""*""
+ priority =""100""
  direction = ""Outbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
  source_address_prefix = ""*""
- destination_port_range = [""0-65535""]
- destination_address_prefix=""VirtualNetwork""
+ destination_port_range = [""443"",""12000""]
+ destination_address_prefix=""AzureCloud""
 },",
-nsg-gh-scaffold-mssql,eastus,AllowInternetOutBound,*,,*,Allow,4096,Outbound,Internet,,*,gh-networking,"{
- name =""AllowInternetOutBound"" protocol = ""*""
- priority =""4096""
- direction = ""Outbound""
+nsg-gh-scaffold-mssql,eastus,Microsoft.Sql-managedInstances_UseOnly_mi-sqlmgmt-in-10-150-70-0-24-v10,SqlManagement,,*,Allow,100,Inbound,10.150.70.0/24,,9000 9003 1438 1440 1452,gh-networking,"{
+ name =""Microsoft.Sql-managedInstances_UseOnly_mi-sqlmgmt-in-10-150-70-0-24-v10"" protocol = ""*""
+ priority =""100""
+ direction = ""Inbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
  source_address_prefix = ""*""
- destination_port_range = [""0-65535""]
- destination_address_prefix=""Internet""
-},",
-nsg-gh-scaffold-mssql,eastus,DenyAllOutBound,*,,*,Deny,4095,Outbound,*,,*,gh-networking,"{
- name =""DenyAllOutBound"" protocol = ""*""
- priority =""4095""
- direction = ""Outbound""
- access = ""Deny""
- source_port_range = [""0-65535""]
- source_address_prefix = ""*""
- destination_port_range = [""0-65535""]
- destination_address_prefix=""*""
+ destination_port_range = [""9000"",""9003"",""1438"",""1440"",""1452""]
+ destination_address_prefix=""10.150.70.0/24""
 },",
 von-gh-scaffold-monitor-nsg,eastus,default-allow-rdp,*,,*,Allow,1000,Inbound,*,,3389,gh-scaffold-workstations,"{
  name =""default-allow-rdp"" protocol = ""*""
@@ -449,9 +449,9 @@ von-gh-scaffold-monitor-nsg,eastus,AllowCidrBlockRDPInboundservers,10.0.40.0/24,
  destination_port_range = [""3389""]
  destination_address_prefix=""10.150.80.0/24""
 },",
-von-gh-scaffold-monitor-nsg,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4096,Inbound,VirtualNetwork,,*,gh-scaffold-workstations,"{
+von-gh-scaffold-monitor-nsg,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4094,Inbound,VirtualNetwork,,*,gh-scaffold-workstations,"{
  name =""AllowVnetInBound"" protocol = ""*""
- priority =""4096""
+ priority =""4094""
  direction = ""Inbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -459,9 +459,9 @@ von-gh-scaffold-monitor-nsg,eastus,AllowVnetInBound,VirtualNetwork,,*,Allow,4096
  destination_port_range = [""0-65535""]
  destination_address_prefix=""VirtualNetwork""
 },",
-von-gh-scaffold-monitor-nsg,eastus,AllowAzureLoadBalancerInBound,AzureLoadBalancer,,*,Allow,4096,Inbound,*,,*,gh-scaffold-workstations,"{
+von-gh-scaffold-monitor-nsg,eastus,AllowAzureLoadBalancerInBound,AzureLoadBalancer,,*,Allow,4095,Inbound,*,,*,gh-scaffold-workstations,"{
  name =""AllowAzureLoadBalancerInBound"" protocol = ""*""
- priority =""4096""
+ priority =""4095""
  direction = ""Inbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -479,9 +479,9 @@ von-gh-scaffold-monitor-nsg,eastus,DenyAllInBound,*,,*,Deny,4096,Inbound,*,,*,gh
  destination_port_range = [""0-65535""]
  destination_address_prefix=""*""
 },",
-von-gh-scaffold-monitor-nsg,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,4096,Outbound,VirtualNetwork,,*,gh-scaffold-workstations,"{
+von-gh-scaffold-monitor-nsg,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,4094,Outbound,VirtualNetwork,,*,gh-scaffold-workstations,"{
  name =""AllowVnetOutBound"" protocol = ""*""
- priority =""4096""
+ priority =""4094""
  direction = ""Outbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
@@ -489,9 +489,9 @@ von-gh-scaffold-monitor-nsg,eastus,AllowVnetOutBound,VirtualNetwork,,*,Allow,409
  destination_port_range = [""0-65535""]
  destination_address_prefix=""VirtualNetwork""
 },",
-von-gh-scaffold-monitor-nsg,eastus,AllowInternetOutBound,*,,*,Allow,4096,Outbound,Internet,,*,gh-scaffold-workstations,"{
+von-gh-scaffold-monitor-nsg,eastus,AllowInternetOutBound,*,,*,Allow,4095,Outbound,Internet,,*,gh-scaffold-workstations,"{
  name =""AllowInternetOutBound"" protocol = ""*""
- priority =""4096""
+ priority =""4095""
  direction = ""Outbound""
  access = ""Allow""
  source_port_range = [""0-65535""]
