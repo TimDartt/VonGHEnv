@@ -84,21 +84,24 @@ module "NSG-Monitor" {
   ]
 }
 
-#Now to associate the NSG with the appropriate resources
-# the sql nsg is applied to a subnet  but no nics
-resource "azurerm_subnet_network_security_group_association" "NSGAssociationSql" {
-  subnet_id                 = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id # the vNet Module builds and passed back an object list containing each of the subnets
-  network_security_group_id = module.NSG-Sql.NsgId                                        # this is the output of the NSG module
-  depends_on = [
-    module.resourceGroup,
-    module.NSG-Sql
-  ]
-}
+# #Now to associate the NSG with the appropriate resources
+# # the sql nsg is applied to a subnet  but no nics
+# resource "azurerm_subnet_network_security_group_association" "NSGAssociationSql" {
+#   subnet_id                 = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id # the vNet Module builds and passed back an object list containing each of the subnets
+#   network_security_group_id = module.NSG-Sql.NsgId                                        # this is the output of the NSG module
+#   depends_on = [
+#     module.resourceGroup,
+#     module.NSG-Sql
+#   ]
+# }
 
 #TODO: gh-ssms-nsg is associated with a Network interface - return and fix after its modeled.
 #TODO: von-gh-scaffold-monitor-nsg doesn't seem to be associated with anything?
 #TODO: gh-scaff-loadbalancer-instanceone-nsg doesn't seem to be associated with anything?
 
+output "test" {
+  value = module.Network_Building.NetworkSubNetsKV["gh-private-1"]
+}
 
 #### END REGION NSG Builds 
 
