@@ -39,7 +39,7 @@ module "Network_Building" {
 # due to complexity and time factors we are going to build Each NSG/ASG this way.
 # doing this allows us to reuse and combine rule sets
 # TODO: come back and figure out how to loop these as a list pass in the root main.tf
-module "NSG-Sql" {
+module "NSGSql" {
   source            = "./modules/Network/NSG"
   NSGName           = "nsg-gh-scaffold-mssql"
   Location          = var.location
@@ -50,7 +50,7 @@ module "NSG-Sql" {
   ]
 }
 
-module "NSG-SSMS" {
+module "NSGSSMS" {
   source            = "./modules/Network/NSG"
   NSGName           = "gh-ssms-nsg"
   Location          = var.location
@@ -62,7 +62,7 @@ module "NSG-SSMS" {
 }
 
 
-module "NSG-LoadBalancer" {
+module "NSGLoadBalancer" {
   source            = "./modules/Network/NSG"
   NSGName           = "gh-scaff-loadbalancer-instanceone-nsg"
   Location          = var.location
@@ -73,7 +73,7 @@ module "NSG-LoadBalancer" {
   ]
 }
 
-module "NSG-Monitor" {
+module "NSGMonitor" {
   source            = "./modules/Network/NSG"
   NSGName           = "von-gh-scaffold-monitor-nsg"
   Location          = var.location
@@ -84,24 +84,24 @@ module "NSG-Monitor" {
   ]
 }
 
-# #Now to associate the NSG with the appropriate resources
-# # the sql nsg is applied to a subnet  but no nics
-# resource "azurerm_subnet_network_security_group_association" "NSGAssociationSql" {
-#   subnet_id                 = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id # the vNet Module builds and passed back an object list containing each of the subnets
-#   network_security_group_id = module.NSG-Sql.NsgId                                        # this is the output of the NSG module
-#   depends_on = [
-#     module.resourceGroup,
-#     module.NSG-Sql
-#   ]
-# }
+#Now to associate the NSG with the appropriate resources
+# the sql nsg is applied to a subnet  but no nics
+resource "azurerm_subnet_network_security_group_association" "NSGAssociationSql" {
+  subnet_id                 = module.Network_Building.NetworkSubNetsKV["gh-private-1"].id # the vNet Module builds and passed back an object list containing each of the subnets
+  network_security_group_id = module.NSGSql.NsgId                                         # this is the output of the NSG module
+  depends_on = [
+    module.resourceGroup,
+    module.NSGSql
+  ]
+}
 
 #TODO: gh-ssms-nsg is associated with a Network interface - return and fix after its modeled.
 #TODO: von-gh-scaffold-monitor-nsg doesn't seem to be associated with anything?
 #TODO: gh-scaff-loadbalancer-instanceone-nsg doesn't seem to be associated with anything?
 
-output "test" {
-  value = module.Network_Building.NetworkSubNetsKV["gh-private-1"]
-}
+# output "test" {
+#   value = module.Network_Building.NetworkSubNetsKV["gh-private-1"]
+# }
 
 #### END REGION NSG Builds 
 
