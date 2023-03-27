@@ -11,6 +11,7 @@ resource "azurerm_network_interface" "nicComp" {
       name                          = ip_configuration.value.name
       subnet_id                     = var.SubNets[ip_configuration.value.subnet_id_name].id
       private_ip_address_allocation = ip_configuration.value.private_ip_address_allocation
+      primary                       = ip_configuration.value.primary
     }
   }
 }
