@@ -1,6 +1,5 @@
 # Create The Networking resource group
 
-
 # Define and build the Resource Groups
 # by prebuilding the resources and groups we can reference them later in the process without having to build them as an initial step
 module "resourceGroup" {
@@ -9,6 +8,13 @@ module "resourceGroup" {
   ResourceGroupName = each.value.resource_group_name
   ResourceLocation  = each.value.location
   tags              = each.value.tags
+}
+
+# build the set of azure application Security groups - they are actually quite simple...
+module "ASGcreation" {
+  source    = "./modules/ApplicationSecurityGroups"
+  ASGGroups = var.ASGGroups
+  location  = var.location
 }
 
 #Network Module Build -- Worked
@@ -30,6 +36,33 @@ module "Network_Building" {
   # security_rules = concat(var.SQLSecRules, var.IISSecRules) #these are loose at best. We still need to setup ASG's
   # secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
 }
+
+output "test" {
+  value = module.Network_Building.NetworkSubNets
+}
+
+
+module "network_interface" {
+  source   = "./modules/Network/NetworkInterface"
+  location = var.location
+  #subnets             = module.Network_Building.NetworkSubNetsKV
+  for_each            = { for index, item in var.NetworkInterface : index => item }
+  nicname             = each.value.nicname
+  resource_group_name = each.value.resource_group_name
+  #  resourceGroupId               = module.Network_Building.NetworkSubNetsKV[each.value.resource_group_name].id
+  enable_accelerated_networking = each.value.enable_accelerated_networking
+  enable_ip_forwarding          = each.value.enable_ip_forwarding
+  ip_configuration              = each.value.ip_configuration
+  #tried to map...
+  #SubNets                       = tomap(module.Network_Building.NetworkSubNetsKV) 
+  #SubNets = tolist(local.test)
+  SubNets = module.Network_Building.NetworkSubNetsKV
+  depends_on = [
+    module.Network_Building
+  ]
+}
+
+
 
 
 #### REGION NSG Builds 
@@ -60,7 +93,6 @@ module "NSGSSMS" {
     module.resourceGroup
   ]
 }
-
 
 module "NSGLoadBalancer" {
   source            = "./modules/Network/NSG"
@@ -124,17 +156,6 @@ module "envSqlDatabase" {
   ]
 }
 
-# build the set of azure application Security groups - they are actually quite simple...
-module "ASGcreation" {
-  source    = "./modules/ApplicationSecurityGroups"
-  ASGGroups = var.ASGGroups
-  location  = var.location
-}
-
-
-
-
-
 # # create the api management service
 # # since we will only need one.... don't make a module yet
 # resource "azurerm_api_management" "rApiManagement" {
@@ -146,9 +167,6 @@ module "ASGcreation" {
 
 #   sku_name = "Developer_1"
 # }
-
-
-
 
 # Build RGS works
 # Build Straight Network Works

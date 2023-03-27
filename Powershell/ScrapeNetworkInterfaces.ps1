@@ -11,9 +11,13 @@ foreach ( $Subscription in $(Get-AzSubscription| Where-Object {$_.State -ne "Dis
     Select-AzSubscription -SubscriptionId $Subscription.SubscriptionId
     $azSubName = $azSub.Name
     $ipc=Get-AzNetworkInterface # -ResourceGroupName gh-networking
+    #Write-Output $ipc
 #now loop through all the configs and prep for export
 foreach ($ip in $ipc)
 {
+    foreach ($sip in $ip.IpConfigurationsText){
+        Write-Output $sip
+    }
     $outputtemp = "" | SELECT  Name	, AuxiliaryMode,DisableTcpStateTracking,DnsSettings,DnsSettingsText,EnableAcceleratedNetworking,EnableIPForwarding,Etag,ExtendedLocation,ExtendedLocationText,HostedWorkloads,Id,IpConfigurations,IpConfigurationsText,Location,MacAddress,NetworkSecurityGroup,NetworkSecurityGroupText,Primary,PrivateEndpoint,PrivateEndpointText,ProvisioningState,ResourceGroupName,ResourceGuid	,Tag	,TagsTable	,TapConfigurations,TapConfigurationsText,Type	,VirtualMachine,VirtualMachineText,VnetEncryptionSupported
     $outputtemp.AuxiliaryMode=$ip.AuxiliaryMode
     $outputtemp.DisableTcpStateTracking=$ip.DisableTcpStateTracking
