@@ -27,6 +27,7 @@ variable "ip_configuration" {
     name                          = string
     subnet_id_name                = string
     private_ip_address_allocation = string
+    primary                       = bool
   }))
 }
 
