@@ -24,7 +24,7 @@ variable "NetworkInterface" {
           name = "privateEndpointIpConfig.2fae0a38-7e70-44f6-b4ef-570752d741eb"
           subnet_id_name : "core-routing",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     },
@@ -38,7 +38,7 @@ variable "NetworkInterface" {
           name = "privateEndpointIpConfig.17fee07e-ac77-430d-aeaf-0e4d8efd59f7"
           subnet_id_name : "gh-internal-1",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     },
@@ -53,7 +53,7 @@ variable "NetworkInterface" {
           name = "privateEndpointIpConfig.2fae0a38-7e70-44f6-b4ef-570752d741eb"
           subnet_id_name : "gh-internal-1",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     },
@@ -67,7 +67,7 @@ variable "NetworkInterface" {
           name = "privateEndpointIpConfig.32efcc72-5fde-4f34-87bc-7488cfdb5efe"
           subnet_id_name : "gh-internal-1",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     },
@@ -81,7 +81,7 @@ variable "NetworkInterface" {
           name = "privateEndpointIpConfig.af76fd56-1a0f-4b3b-8b38-a0f02c7638af"
           subnet_id_name : "gh-internal-1",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     },
@@ -116,7 +116,7 @@ variable "NetworkInterface" {
           name = "gh-scaffold-lb-priv-private-linkservice-1"
           subnet_id_name : "gh-scaffold-lb-priv-private-linkservice",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     },
@@ -131,7 +131,7 @@ variable "NetworkInterface" {
           name = "ipconfig1"
           subnet_id_name : "gh-scaffold-lb-priv-backendservers",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     },
@@ -147,7 +147,7 @@ variable "NetworkInterface" {
           name = "privateEndpointIpConfig.60738fe2-68d6-4470-8623-9ccf3b18090c"
           subnet_id_name : "gh-internal-1",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     },
@@ -162,7 +162,7 @@ variable "NetworkInterface" {
           name = "privateEndpointIpConfig.237a0d07-2138-4164-8403-68b5d92fd5ee"
           subnet_id_name : "gh-internal-1",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     },
@@ -176,7 +176,7 @@ variable "NetworkInterface" {
           name = "privateEndpointIpConfig.1ec4c945-b183-438d-8a5c-aec9d6fd4fdd"
           subnet_id_name : "gh-internal-1",
           private_ip_address_allocation : "Dynamic",
-          primary = false
+          primary = true
         }
       ]
     }
