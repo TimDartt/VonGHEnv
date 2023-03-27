@@ -37,11 +37,6 @@ module "Network_Building" {
   # secGroupName   = "GlobalHealthNSGSecurity"                #this will eventually need to be modified to reflect the subnet/environment
 }
 
-output "test" {
-  value = module.Network_Building.NetworkSubNets
-}
-
-
 module "network_interface" {
   source   = "./modules/Network/NetworkInterface"
   location = var.location

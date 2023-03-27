@@ -1,3 +1,4 @@
+
 resource "azurerm_network_interface" "nicComp" {
   name                          = var.nicname
   location                      = var.location
