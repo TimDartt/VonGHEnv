@@ -86,7 +86,7 @@ variable "NetworkInterface" {
       ]
     },
     {
-      nicname                       = "gh-scaff-loadbalancer-private-linkservice.nic.4692ba43-3bf0-4296-98da-403ec49ffb89"
+      nicname                       = "gh-scaff-loadbalancer-private-linkservice.nic"
       resource_group_name           = "gh-scaffold-loadbalancer"
       enable_accelerated_networking = false
       enable_ip_forwarding          = false

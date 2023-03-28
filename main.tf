@@ -17,6 +17,8 @@ module "ASGcreation" {
   location  = var.location
 }
 
+######## Region - Build network interface components :)   ########
+
 #Network Module Build -- Worked
 # adding subnet builds -- Worked
 # adding Security Build
@@ -57,6 +59,13 @@ module "network_interface" {
   ]
 }
 
+# module "Local_Gateway" {
+#   source = "./modules/Network/LocalNetworkGateways"
+#   # loop through all the defined gateways and build them. NOTE: append the intial BaseNet
+# }
+
+
+######## End Region - Build network interface components :)   ########
 
 
 
@@ -131,6 +140,18 @@ resource "azurerm_subnet_network_security_group_association" "NSGAssociationSql"
 # }
 
 #### END REGION NSG Builds 
+
+module "PublicIPsResource" {
+  # this will output a set of Names/PublicIPS based on the PublicIPs defined in PublicIPs.tf
+  source    = "./modules/Network/PublicIPs"
+  PublicIPS = var.PublicIPS
+  Location  = var.location
+  tags      = local.tags
+}
+
+
+
+
 
 #Lets build the Managed instance Sql Database
 #create a sql Database :)
