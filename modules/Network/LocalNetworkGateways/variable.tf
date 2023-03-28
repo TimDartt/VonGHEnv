@@ -8,7 +8,7 @@ variable "ResourceGroup" {
   description = "Resource group to associate the gateway with"
 }
 variable "AddressSpace" {
-  type        = string
+  type        = list(string)
   description = "The gateway address space"
 }
 

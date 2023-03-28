@@ -59,10 +59,17 @@ module "network_interface" {
   ]
 }
 
-# module "Local_Gateway" {
-#   source = "./modules/Network/LocalNetworkGateways"
-#   # loop through all the defined gateways and build them. NOTE: append the intial BaseNet
-# }
+module "Local_Gateway" {
+  # loop through all the defined gateways and build them. NOTE: append the intial BaseNet
+  source         = "./modules/Network/LocalNetworkGateways"
+  Location       = var.location
+  for_each       = { for index, item in var.LocalNetworkGateways : index => item }
+  GatewayName    = each.value.name
+  ResourceGroup  = each.value.resource_group_name
+  GatewayAddress = each.value.gateway_address
+  AddressSpace   = each.value.address_space
+
+}
 
 
 ######## End Region - Build network interface components :)   ########

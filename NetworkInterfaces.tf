@@ -1,4 +1,5 @@
 variable "NetworkInterface" {
+  description = "A list of all the defined network interfaces and their IP configurations"
   type = list(object(
     {
       nicname                       = string
