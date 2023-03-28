@@ -68,11 +68,18 @@ module "Local_Gateway" {
   ResourceGroup  = each.value.resource_group_name
   GatewayAddress = each.value.gateway_address
   AddressSpace   = each.value.address_space
-
 }
 
-
 ######## End Region - Build network interface components :)   ########
+
+
+#### Build the Storage accounts (which are used later on!)
+module "StorageAccount" {
+  source          = "./modules/StorageAccounts"
+  StorageAccounts = var.StorageAccounts
+  Location        = var.location
+  Tags            = local.tags
+}
 
 
 

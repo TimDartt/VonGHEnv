@@ -1,3 +1,5 @@
+#TODO: Review to see if the specificity for Sql is needed just for Sql storage...
+
 resource "random_string" "random" {
   length  = 4
   special = false
