@@ -10,7 +10,7 @@ variable "StorageAccounts" {
   )
   default = [
     {
-      name                     = "ghfunctionsbc7c"
+      name                     = "ghfunction"
       resource_group_name      = "GHFunctions"
       account_tier             = "Standard"
       account_replication_type = "RAGRS"
@@ -24,7 +24,7 @@ variable "StorageAccounts" {
       account_kind             = "StorageV2"
     }
     , {
-      name                     = "sqlvazjy37v2w3yqcs"
+      name                     = "sqlvonscaffold"
       resource_group_name      = "gh-scaffolding-database"
       account_tier             = "Standard"
       account_replication_type = "RAGRS"
