@@ -22,11 +22,11 @@ foreach ( $Subscription in $(Get-AzSubscription| Where-Object {$_.State -ne "Dis
         foreach ($sa in $storageAccts)
         {
             # Write-Output $sa -- use to see the output 
-#### The following is used to create the output 
+            #### The following is used to create the output
             $outputtemp += "{`nname                    = `""+$sa.StorageAccountName + "`""
             $outputtemp += "`nresource_group_name      = `""+$sa.ResourceGroupName+ "`""
-            $outputtemp += "`naccount_tier             = 'Standard'"
-            $outputtemp += "`naccount_replication_type = 'RAGRS'"
+            $outputtemp += "`naccount_tier             = `"Standard`""
+            $outputtemp += "`naccount_replication_type = `"RAGRS`""
             $outputtemp += "`naccount_kind             = `""+$sa.Kind+ "`""
             $outputtemp += "`n}`n,"
         }

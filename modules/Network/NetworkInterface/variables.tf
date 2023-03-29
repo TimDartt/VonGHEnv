@@ -6,10 +6,7 @@ variable "nicname" {
 variable "location" {
   type = string
 }
-# variable "resourceGroupId" {
-#   type        = string
-#   description = "Resource group containing the NSG"
-# }
+
 variable "enable_accelerated_networking" {
   type = bool
 }
@@ -34,8 +31,6 @@ variable "ip_configuration" {
 variable "SubNets" {
   type = any
 }
-
-
 
 # variable "SubNets" {
 #   type = list(object({

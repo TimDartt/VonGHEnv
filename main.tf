@@ -19,9 +19,7 @@ module "ASGcreation" {
 
 ######## Region - Build network interface components :)   ########
 
-#Network Module Build -- Worked
-# adding subnet builds -- Worked
-# adding Security Build
+#Network Module Build 
 module "Network_Building" {
   source        = "./modules/Network/vNets"
   resourceGroup = "gh-networking"
@@ -69,11 +67,21 @@ module "Local_Gateway" {
   GatewayAddress = each.value.gateway_address
   AddressSpace   = each.value.address_space
 }
-
-
+#### set up the dns entries
 module "PrivateDNSZones" {
-  source          = "./modules/Network/PrivateDNSZones"
+  source          = "./modules/Network/DNS/PrivateDNSZones"
   PrivateDNSZones = var.PrivateDNSZones
+  depends_on = [
+    module.resourceGroup
+  ]
+}
+module "ARecords" {
+  source   = "./modules/Network/DNS/ARecords"
+  ARecords = var.ARecords
+  depends_on = [
+    module.PrivateDNSZones
+  ]
+
 }
 ######## End Region - Build network interface components :)   ########
 
@@ -167,10 +175,6 @@ module "PublicIPsResource" {
   Location  = var.location
   tags      = local.tags
 }
-
-
-
-
 
 #Lets build the Managed instance Sql Database
 #create a sql Database :)
