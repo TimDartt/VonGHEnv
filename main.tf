@@ -70,6 +70,11 @@ module "Local_Gateway" {
   AddressSpace   = each.value.address_space
 }
 
+
+module "PrivateDNSZones" {
+  source          = "./modules/Network/PrivateDNSZones"
+  PrivateDNSZones = var.PrivateDNSZones
+}
 ######## End Region - Build network interface components :)   ########
 
 
