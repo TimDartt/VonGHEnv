@@ -212,6 +212,7 @@ module "APIManagers" {
 module "APIs" {
   source = "./modules/API/APIs"
   APIs   = var.APIs
+  Env    = var.Env
   depends_on = [
     module.APIManagers
   ]

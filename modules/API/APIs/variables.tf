@@ -12,3 +12,10 @@ variable "APIs" {
     }
   ))
 }
+
+variable "Env" {
+  description = "The environment of the build"
+  type        = string
+
+}
+
