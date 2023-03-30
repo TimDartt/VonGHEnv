@@ -42,3 +42,13 @@ variable "sqlPassword" {
   type        = string
   description = ""
 }
+
+variable "ContactEmail" {
+  description = "Contact email for this subscription"
+  type        = string
+}
+
+variable "Company" {
+  description = "Name of the company to display"
+  type        = string
+}

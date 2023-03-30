@@ -195,6 +195,16 @@ module "envSqlDatabase" {
   ]
 }
 
+
+# Build out all the API Managers
+module "APIManagers" {
+  source       = "./modules/APIManagement"
+  Location     = var.location
+  ContactEmail = var.ContactEmail
+  Company      = var.Company
+  APIMangers   = var.APIManagers
+
+}
 # # create the api management service
 # # since we will only need one.... don't make a module yet
 # resource "azurerm_api_management" "rApiManagement" {

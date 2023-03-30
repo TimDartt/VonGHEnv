@@ -5,6 +5,9 @@
 Connect-AzAccount
 clear
 
+# Set the sub ID to pull from 
+$SubId = '71753224-e8e9-4591-a74c-9ba9f5767223'
+
 #next get all the 
 Get-AzContext #-ListAvailable
 
@@ -13,7 +16,7 @@ foreach ( $Subscription in $(Get-AzSubscription| Where-Object {$_.State -ne "Dis
 {
     $outputtemp = ""
 # get the subscription
-    if ($Subscription.SubscriptionId -eq '71753224-e8e9-4591-a74c-9ba9f5767223')  # the scaffolding Sub ID
+    if ($Subscription.SubscriptionId -eq $SubId)  # the scaffolding Sub ID
     {
 
         Select-AzSubscription -SubscriptionId $Subscription.SubscriptionId
@@ -23,7 +26,8 @@ foreach ( $Subscription in $(Get-AzSubscription| Where-Object {$_.State -ne "Dis
         {
             # Write-Output $sa -- use to see the output 
             #### The following is used to create the output
-            $outputtemp += "{`nname                    = `""+$sa.StorageAccountName + "`""
+            $outputtemp += "{`n"
+            $outputtemp += "name                    = `""+$sa.StorageAccountName + "`""
             $outputtemp += "`nresource_group_name      = `""+$sa.ResourceGroupName+ "`""
             $outputtemp += "`naccount_tier             = `"Standard`""
             $outputtemp += "`naccount_replication_type = `"RAGRS`""
