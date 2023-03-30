@@ -1,5 +1,5 @@
-variable "APIMangers" {
-  descrdescription = "List of APIManagers"
+variable "APIManagers" {
+  description = "List of APIManagers"
   type = list(object(
     {
       Name                    = string

@@ -202,8 +202,7 @@ module "APIManagers" {
   Location     = var.location
   ContactEmail = var.ContactEmail
   Company      = var.Company
-  APIMangers   = var.APIManagers
-
+  APIManagers  = var.APIManagers
 }
 # # create the api management service
 # # since we will only need one.... don't make a module yet
