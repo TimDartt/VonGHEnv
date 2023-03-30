@@ -1,5 +1,5 @@
 
-resource "azurerm_api_management" "example" {
+resource "azurerm_api_management" "APIManagementResource" {
   publisher_name  = var.Company
   publisher_email = var.ContactEmail
   location        = var.Location

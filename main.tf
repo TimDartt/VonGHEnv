@@ -198,12 +198,23 @@ module "envSqlDatabase" {
 
 # Build out all the API Managers
 module "APIManagers" {
-  source       = "./modules/APIManagement"
+  source       = "./modules/API/APIManagement"
   Location     = var.location
   ContactEmail = var.ContactEmail
   Company      = var.Company
   APIManagers  = var.APIManagers
   Env          = var.Env
+  depends_on = [
+    module.resourceGroup
+  ]
+}
+
+module "APIs" {
+  source = "./modules/API/APIs"
+  APIs   = var.APIs
+  depends_on = [
+    module.APIManagers
+  ]
 }
 
 
