@@ -203,6 +203,7 @@ module "APIManagers" {
   ContactEmail = var.ContactEmail
   Company      = var.Company
   APIManagers  = var.APIManagers
+  Env          = var.Env
 }
 
 

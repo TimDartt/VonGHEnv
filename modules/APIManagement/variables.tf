@@ -23,3 +23,8 @@ variable "Company" {
   description = "Name of the company to display"
   type        = string
 }
+variable "Env" {
+  description = "The environment of the build"
+  type        = string
+
+}
