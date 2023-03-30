@@ -204,6 +204,8 @@ module "APIManagers" {
   Company      = var.Company
   APIManagers  = var.APIManagers
 }
+
+
 # # create the api management service
 # # since we will only need one.... don't make a module yet
 # resource "azurerm_api_management" "rApiManagement" {

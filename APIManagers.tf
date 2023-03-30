@@ -8,7 +8,7 @@ variable "APIManagers" {
     }
   ))
   default = [{
-    Name                    = "vonGHFunctions-apim"
+    Name                    = "vonGHFunctions-apim-stg"
     ResourceGroup           = "ghfunctions"
     Sku                     = "Consumption_0"
     EnableClientCertificate = false
