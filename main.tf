@@ -225,19 +225,15 @@ module "ServicePlans" {
   ServicePlans = var.ServicePlans
   Location     = var.location
 }
-output "ServicePlan" {
-  value = module.ServicePlans.ServicePlanKV
-}
 
-
-resource "azurerm_windows_function_app" "GHFunctionApps" {
-  name                       = "vonGHFunctions${var.Env}"
-  resource_group_name        = "ghfunctions"
-  location                   = var.location
-  storage_account_name       = "ghfunction${module.StorageAccount.StorgeInfoRandom}"
-  storage_account_access_key = module.StorageAccount.StorageAccountInfoKV["ghfunction${module.StorageAccount.StorgeInfoRandom}"].primary_access_key
-  service_plan_id            = module.ServicePlans.ServicePlanKV["ASP-vonGHFunctions-9562"].id
-  site_config {}
+module "FunctionApps" {
+  source           = "./modules/API/FunctionApp"
+  location         = var.location
+  FunctionApps     = var.FunctionApps
+  Env              = var.Env
+  StorgeInfoRandom = module.StorageAccount.StorgeInfoRandom
+  StorageAccounts  = module.StorageAccount.StorageAccountInfoKV
+  ServicePlans     = module.ServicePlans.ServicePlanKV
 }
 
 # # create the api management service
