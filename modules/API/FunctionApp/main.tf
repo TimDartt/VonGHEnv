@@ -1,9 +1,10 @@
-
-resource "azurerm_function_app" "example" {
-  name                       = "test-azure-functions"
-  location                   = azurerm_resource_group.example.location
-  resource_group_name        = azurerm_resource_group.example.name
-  app_service_plan_id        = azurerm_app_service_plan.example.id
-  storage_account_name       = azurerm_storage_account.example.name
-  storage_account_access_key = azurerm_storage_account.example.primary_access_key
+resource "azurerm_windows_function_app" "GHFunctionApps" {
+  location                   = var.location
+  for_each                   = { for index, item in var.FunctionApps : index => item }
+  name                       = "${each.value.name}${var.Env}"
+  resource_group_name        = each.value.resource_group_name
+  storage_account_name       = "${each.value.storage_account_name}${var.StorgeInfoRandom}"
+  storage_account_access_key = var.StorageAccounts["${each.value.storage_account_name}${var.StorgeInfoRandom}"].primary_access_key
+  service_plan_id            = var.ServicePlans[each.value.ServicePlan].id
+  site_config {}
 }
