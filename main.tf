@@ -67,6 +67,7 @@ module "Local_Gateway" {
   GatewayAddress = each.value.gateway_address
   AddressSpace   = each.value.address_space
 }
+
 #### set up the dns entries
 module "PrivateDNSZones" {
   source          = "./modules/Network/DNS/PrivateDNSZones"
@@ -75,6 +76,7 @@ module "PrivateDNSZones" {
     module.resourceGroup
   ]
 }
+
 module "ARecords" {
   source   = "./modules/Network/DNS/ARecords"
   ARecords = var.ARecords
@@ -195,7 +197,6 @@ module "envSqlDatabase" {
   ]
 }
 
-
 # Build out all the API Managers
 module "APIManagers" {
   source       = "./modules/API/APIManagement"
@@ -218,6 +219,26 @@ module "APIs" {
   ]
 }
 
+#build all the service plans that are in use
+module "ServicePlans" {
+  source       = "./modules/API/ServicePlans"
+  ServicePlans = var.ServicePlans
+  Location     = var.location
+}
+output "ServicePlan" {
+  value = module.ServicePlans.ServicePlanKV
+}
+
+
+resource "azurerm_windows_function_app" "GHFunctionApps" {
+  name                       = "vonGHFunctions${var.Env}"
+  resource_group_name        = "ghfunctions"
+  location                   = var.location
+  storage_account_name       = "ghfunction${module.StorageAccount.StorgeInfoRandom}"
+  storage_account_access_key = module.StorageAccount.StorageAccountInfoKV["ghfunction${module.StorageAccount.StorgeInfoRandom}"].primary_access_key
+  service_plan_id            = module.ServicePlans.ServicePlanKV["ASP-vonGHFunctions-9562"].id
+  site_config {}
+}
 
 # # create the api management service
 # # since we will only need one.... don't make a module yet
@@ -280,3 +301,20 @@ module "APIs" {
 # #   location = "eastus"
 # # }
 
+
+# ##### test the module outputs:
+# # test the return of the random string
+# output "StorgeInfoRandom" {
+#   value = module.StorageAccount.StorgeInfoRandom
+# }
+# # review the base info as to what is being returned
+# output "StorageInfo" {
+#   value = module.StorageAccount.StorageInfo
+# }
+#check to see if we can access the data by name
+# output "checkStorageInfo" {
+#   #  value = module.StorageAccount.StorageInfo["ghfunction${module.StorageAccount.StorgeInfoRandom}"]
+#   #value = module.StorageAccount.StorageAccountInfoKV["ghfunction${module.StorageAccount.StorgeInfoRandom}"].id
+#   sensitive = true
+#   #value     = module.StorageAccount.StorageAccountInfoKV["ghfunction${module.StorageAccount.StorgeInfoRandom}"].primary_access_key
+# }
