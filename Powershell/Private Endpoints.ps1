@@ -1,4 +1,5 @@
 ﻿#Get-AzPrivateEndpoint
+
 ### Boiler Plate
 # get all the storage account info
 # 
@@ -12,71 +13,66 @@ Get-AzContext #-ListAvailable
 $outputfinal=@()   # create the output string
 foreach ( $Subscription in $(Get-AzSubscription| Where-Object {$_.State -ne "Disabled"}) )    # get all the subscriptions
 {
-$outputtemp = ""
+    $outputtemp = ""
+    $outputASGAssoc = ""
 # get the subscription
     if ($Subscription.SubscriptionId -eq '71753224-e8e9-4591-a74c-9ba9f5767223')  # the scaffolding Sub ID
     {
 
-        Select-AzSubscription -SubscriptionId $Subscription.SubscriptionId
+    Select-AzSubscription -SubscriptionId $Subscription.SubscriptionId
 ####    replace the next command with the appropriate azure fetchs
-        $PEs = Get-AzPrivateEndpoint
-        foreach ($sa in $PEs)
-        {
-            # Write-Output $sa # use to see the output 
-            #### The following is used to create the output
-#            $pls = Get-AzPrivateLinkService -ResourceGroupName $sa.ResourceGroupName -Name $sa.Name
- #           Write-Output $pls -- use to see the output 
-
- # custom_network_interface_name
-            # Get the substring between the last slash and search string
-            $lastSlash = $sa.SubnetText.LastIndexOf("/")
-            $subNet = $sa.SubnetText.Substring($lastSlash + 1, $sa.SubnetText.IndexOf(",") - $lastSlash - 2)
-
-            $outputtemp += "{"
-            $outputtemp += "`nname                = `""+$sa.Name + "`""
-            $outputtemp += "`ncustom_network_interface_name                = `""+$sa.CustomNetworkInterfaceName + "`""
-            $outputtemp +="`nsubnet           = "+$subNet+ "`""
-
-
-<#
-
-            $outputtemp +="`n = `""+$sa. + "`""
-            $outputtemp +="`n = `""+$sa. + "`""
-            $outputtemp +="`n = `""+$sa. + "`""
-            $outputtemp +="`n = `""+$sa. + "`""
-            $outputtemp +="`n = `""+$sa. + "`""
-            $outputtemp +="`n = `""+$sa. + "`""
-#>
-
-            $outputtemp +="`nresource_group_name = "+$sa.ResourceGroupName + "`""
-            
+        $endpoints=Get-AzPrivateEndpoint # get all the endpoints in the subscription
+        foreach ($ep in $endpoints) {
+            # Write-Output $ep 
+            $outputtemp += "{`nname                    = '"+$ep.Name + "'"
+            $outputtemp += "`nresource_group_name      = '"+$ep.ResourceGroupName+ "'"
+            $outputtemp += "`npcustom_network_interface_name      = '"+$ep.custom_network_interface_name+ "'"
             $outputtemp += "`n}`n,"
+            # build the ASG associations
+            foreach ($asg in $ep.ApplicationSecurityGroupsText)
+                {
+                # Write-Output $asg
+                # Get the substring between the last slash and search string
+                $lastSlash = $asg.LastIndexOf("/")
+                if ($lastSlash -gt 0){
+                    # extract any existing ASG :)
+                    $asg = $asg.Substring($lastSlash+1, $asg.IndexOf("`n", $lastSlash) - $lastSlash-3)
+                    if ($asg -gt '.'){
+                        $outputASGAssoc += "{`nEndPoinName                    = '"+$ep.Name + "'" # set the name of the EP (which will be needed to find the ID of the EP
+                        $outputASGAssoc += "`nASGName                    = '" + $asg
+                        $outputASGAssoc += "`n}`n,"
+                    }
+                 }
+                }
+         
+              }
+
+            }
+            if ($outputtemp -gt '.') {
+            Write-Output '***** Sub ID :' + $Subscription.SubscriptionId
+            Write-Output '** EPs '
+            Write-Output $outputtemp
+            Write-Output '** ASG Assoc '
+            Write-Output $outputASGAssoc
+            Write-Output '***** '
+            }
         }
-    }
+
+
+####    foreach ($sa in $storageAccts)
+#        {
+            # Write-Output $sa -- use to see the output 
+#### The following is used to create the output 
+#            $outputtemp += "{`nname                    = '"+$sa.StorageAccountName + "'"
+#            $outputtemp += "`nresource_group_name      = '"+$sa.ResourceGroupName+ "'"
+#            $outputtemp += "`naccount_tier             = 'Standard'"
+#            $outputtemp += "`naccount_replication_type = 'RAGRS'"
+#            $outputtemp += "`naccount_kind             = '"+$sa.Kind+ "'"
+#            $outputtemp += "`n}`n,"
+#            }
+#           }
 #            Write-Output $outputtemp
 #####   
-}
+#        }
 
 
-
-<#
-#build the private link service
-
-
-
-
-#Build the endpoint
-resource "azurerm_private_endpoint" "example" {
-  name                = "example-endpoint"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  subnet_id           = azurerm_subnet.endpoint.id
-
-  private_service_connection {
-    name                           = "example-privateserviceconnection"
-    private_connection_resource_id = azurerm_private_link_service.example.id
-    is_manual_connection           = false
-  }
-}
-
-#>

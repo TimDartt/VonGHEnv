@@ -5,5 +5,6 @@ locals {
   baseInstance = format("%02s", var.instance)
   tags = {
     created = timestamp()
+    env     = "${var.Env}"
   }
 }
